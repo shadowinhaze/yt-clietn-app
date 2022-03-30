@@ -1,15 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-search-results-item-more',
   templateUrl: './search-results-item-more.component.html',
-  styleUrls: ['./search-results-item-more.component.scss']
+  styleUrls: ['./search-results-item-more.component.scss'],
 })
-export class SearchResultsItemMoreComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
-}
+export class SearchResultsItemMoreComponent {}
