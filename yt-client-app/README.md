@@ -2,26 +2,46 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.0.
 
-## Development server
+---
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+<p align="center">A Roling Scope School - ST3 - task-project</p>
+<p align="center">
+  <a href="https://github.com/rolling-scopes-school"><img alt="GitHub followers" src="https://img.shields.io/github/followers/rolling-scopes-school?color=faea68&label=RSS&logoColor=faea68&style=for-the-badge"></a>
+  <a href="https://github.com/rolling-scopes-school/tasks"><img alt="GitHub forks" src="https://img.shields.io/github/forks/rolling-scopes-school/tasks?color=faea68&label=RSS%20Tasks&style=for-the-badge"></a>
+</p>
+<p align="center">
+  <!-- <a href="#">🚀 Deploy (Demo)</a> <br> -->
+  <a href="https://github.com/rolling-scopes-school/tasks/tree/master/tasks/angular">📗 Technical specification with materials</a>
+</p>
 
-## Code scaffolding
+<h3 align="center">Student</h3>
+<p align="center">
+  👨‍💻 Yan Poleshko (<a href="https://github.com/shadowinhaze">@shadowinhaze</a>)
+</p>
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## About
 
-## Build
+School project. A simple Web application imitates some YouTube functionality. The application is building in order to familiarize with the Angular framework and its main parts.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+In this project, the students work exclusively within the set tasks and limitations.
 
-## Running unit tests
+## Stack Technology
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### 🌴 Front-End
 
-## Running end-to-end tests
+- Project uses `Angular 13`.
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+- The lack of a UI/UX-designer compensates by using the `Angular Material UI` library with ready for use components.
 
-## Further help
+- `SASS` preprocessor (.scss syntax) is used for addition component stylisation.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+- `.eslint` with AirBnB config and `.prettier` are used for maintenance code-quality and unified code-writing.
+
+---
+
+💡 You can run your own front-end version:
+
+- Clone repo with FE.
+- Read Techs for full information.
+- `npm i`
+- `ng serve` for a dev server. Navigate to `http://localhost:4200/`.
