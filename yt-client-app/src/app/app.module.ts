@@ -12,6 +12,7 @@ import { SearchResultsItemComponent } from './components/search-results-item/sea
 import { SearchResultsItemMoreComponent } from './components/search-results-item-more/search-results-item-more.component';
 import { FilterSortComponent } from './components/filter-sort/filter-sort.component';
 import { LoginComponent } from './components/header/login/login.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,7 @@ import { LoginComponent } from './components/header/login/login.component';
     FilterSortComponent,
     LoginComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule],
+  imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule],
   providers: [],
   bootstrap: [AppComponent],
 })
