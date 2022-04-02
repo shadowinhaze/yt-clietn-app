@@ -1,1 +1,29 @@
-<p>header works!</p>
+<header>
+  <mat-toolbar class="header-toolbar">
+    <mat-toolbar-row class="header-container">
+      <div class="header-subcontainer">
+        <div class="header-logo">
+          <h1 class="header-logo__title header-logo__title_hiden">
+            {{ mainTitle }}
+          </h1>
+          <img src="assets/yt-logo.svg" alt="YT client app Logotype" />
+        </div>
+        <yt-search-input
+          style="flex-grow: 2"
+          (searchValueSubmit)="onSearchValueSubmit()"
+        ></yt-search-input>
+        <yt-filter-activator
+          (showSettings)="showSettings()"
+        ></yt-filter-activator>
+      </div>
+      <yt-login></yt-login>
+    </mat-toolbar-row>
+    <mat-toolbar-row *ngIf="isSettingsActive" class="header-container">
+      <yt-filter-sort
+        style="width: 100%"
+        (sortTypeChange)="onSortTypeChange()"
+        (filterValueChange)="onFilterValueChange()"
+      ></yt-filter-sort>
+    </mat-toolbar-row>
+  </mat-toolbar>
+</header>
