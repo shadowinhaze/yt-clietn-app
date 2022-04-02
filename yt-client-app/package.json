@@ -58,6 +58,7 @@
     "tabWidth": 2,
     "singleQuote": true,
     "useTabs": false,
-    "endOfLine": "auto"
+    "endOfLine": "auto",
+    "trailingComma": "es5"
   }
 }
