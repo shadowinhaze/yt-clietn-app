@@ -1,1 +1,57 @@
-<p>search-results-item works!</p>
+<mat-card class="results-card">
+  <img
+    mat-card-image
+    class="results-card__thumbnail"
+    src="{{ card.snippet.thumbnails['medium'].url }}"
+    alt="{{ card.snippet.channelTitle }} | {{ card.snippet.title }}"
+  />
+  <mat-card-content style="width: 100%">
+    <div class="results-card__descriptor">
+      <div
+        class="results-card__descriptor-item results-card__descriptor__views"
+      >
+        <mat-icon class="results-card__descriptor-item__icon"
+          >visibility</mat-icon
+        >
+        <span>{{ card.statistics.viewCount | reduceNumber }}</span>
+      </div>
+      <div
+        class="results-card__descriptor-item results-card__descriptor__likes"
+      >
+        <mat-icon class="results-card__descriptor-item__icon"
+          >thumb_up</mat-icon
+        >
+        <span>{{ card.statistics.likeCount | reduceNumber }}</span>
+      </div>
+      <div
+        class="results-card__descriptor-item results-card__descriptor__dislikes"
+      >
+        <mat-icon class="results-card__descriptor-item__icon"
+          >thumb_down</mat-icon
+        >
+        <span>{{ card.statistics.dislikeCount }}</span>
+      </div>
+      <div
+        class="results-card__descriptor-item results-card__descriptor__comments"
+      >
+        <mat-icon class="results-card__descriptor-item__icon">comment</mat-icon>
+        <span>{{ card.statistics.commentCount }}</span>
+      </div>
+    </div>
+  </mat-card-content>
+  <mat-card-title class="results-card__title">{{
+    card.snippet.title
+  }}</mat-card-title>
+  <mat-card-actions class="results-card__actions">
+    <button mat-raised-button color="primary" class="results-card__action">
+      more...
+    </button>
+  </mat-card-actions>
+  <mat-card-footer class="results-card__footer">
+    <div
+      class="results-card__indicator"
+      ytCardBorderColor
+      publishedDate="{{ card.snippet.publishedAt }}"
+    ></div>
+  </mat-card-footer>
+</mat-card>
