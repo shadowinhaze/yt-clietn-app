@@ -1,0 +1,14 @@
+.header-filter {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 580px;
+  margin: 0 auto;
+  justify-content: space-between;
+  &__label {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 14px;
+    color: #929292;
+  }
+}

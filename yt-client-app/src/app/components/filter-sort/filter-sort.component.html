@@ -1,1 +1,45 @@
-<p>filter-sort works!</p>
+<div class="header-filter">
+  <h3 class="header-filter__label">Sorting by:</h3>
+  <button mat-stroked-button (click)="actionSort('date')">
+    date
+    <!-- TODO dynamic asc | desc icon -->
+    <!-- <ng-template ytDirectionIcon></ng-template> -->
+    <mat-icon
+      *ngIf="
+        settingsService.sortType === 'date' &&
+        settingsService.sortDirection === 'asc'
+      "
+      >trending_up</mat-icon
+    >
+    <mat-icon
+      *ngIf="
+        settingsService.sortType === 'date' &&
+        settingsService.sortDirection === 'desc'
+      "
+      >trending_down</mat-icon
+    >
+  </button>
+  <button mat-stroked-button (click)="actionSort('views')">
+    count of views
+    <mat-icon
+      *ngIf="
+        settingsService.sortType === 'views' &&
+        settingsService.sortDirection === 'asc'
+      "
+      >trending_up</mat-icon
+    >
+    <mat-icon
+      *ngIf="
+        settingsService.sortType === 'views' &&
+        settingsService.sortDirection === 'desc'
+      "
+      >trending_down</mat-icon
+    >
+  </button>
+  <h3 class="header-filter__label">By word or setance:</h3>
+  <input
+    type="text"
+    [(ngModel)]="settingsService.filterValue"
+    (ngModelChange)="actionFilter($event)"
+  />
+</div>
