@@ -23,4 +23,8 @@ export class FilterSortComponent {
     this.settingsService.sortType = '';
     this.filterValueChange.emit();
   }
+
+  getIconCondition(type: SortType) {
+    return this.settingsService.sortType === type;
+  }
 }

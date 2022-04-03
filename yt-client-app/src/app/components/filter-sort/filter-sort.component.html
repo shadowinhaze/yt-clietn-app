@@ -2,39 +2,26 @@
   <h3 class="header-filter__label">Sorting by:</h3>
   <button mat-stroked-button (click)="actionSort('date')">
     date
-    <!-- TODO dynamic asc | desc icon -->
-    <!-- <ng-template ytDirectionIcon></ng-template> -->
-    <mat-icon
-      *ngIf="
-        settingsService.sortType === 'date' &&
-        settingsService.sortDirection === 'asc'
-      "
-      >trending_up</mat-icon
+    <!-- TODO reduce html component representation -->
+    <ng-template
+      ytDirectionIcon
+      [condition]="getIconCondition('date')"
+      [isDirAsc]="settingsService.isAscending"
+      [thumbDown]="thumbDown"
     >
-    <mat-icon
-      *ngIf="
-        settingsService.sortType === 'date' &&
-        settingsService.sortDirection === 'desc'
-      "
-      >trending_down</mat-icon
-    >
+      <mat-icon>trending_up</mat-icon>
+    </ng-template>
   </button>
   <button mat-stroked-button (click)="actionSort('views')">
     count of views
-    <mat-icon
-      *ngIf="
-        settingsService.sortType === 'views' &&
-        settingsService.sortDirection === 'asc'
-      "
-      >trending_up</mat-icon
+    <ng-template
+      ytDirectionIcon
+      [condition]="getIconCondition('views')"
+      [isDirAsc]="settingsService.isAscending"
+      [thumbDown]="thumbDown"
     >
-    <mat-icon
-      *ngIf="
-        settingsService.sortType === 'views' &&
-        settingsService.sortDirection === 'desc'
-      "
-      >trending_down</mat-icon
-    >
+      <mat-icon>trending_up</mat-icon>
+    </ng-template>
   </button>
   <h3 class="header-filter__label">By word or setance:</h3>
   <input
@@ -43,3 +30,7 @@
     (ngModelChange)="actionFilter($event)"
   />
 </div>
+
+<ng-template #thumbDown>
+  <mat-icon>trending_down</mat-icon>
+</ng-template>

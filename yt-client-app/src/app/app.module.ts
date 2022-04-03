@@ -28,6 +28,7 @@ import { CardBorderColorDirective } from './directives/border-color.directive';
 import { DataService } from './services/data.service';
 import { SortDataService } from './services/sort-data-service';
 import { FilterDataService } from './services/filter-data-service';
+import { DirectionIconDirective } from './directives/direction-icon.directive';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { FilterDataService } from './services/filter-data-service';
     LoginComponent,
     ReduceNumberPipe,
     CardBorderColorDirective,
+    DirectionIconDirective,
   ],
   imports: [
     BrowserModule,

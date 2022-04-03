@@ -42,4 +42,8 @@ export class SettingsService {
   set searchValue(value: string) {
     this.settings.searchValue = value;
   }
+
+  get isAscending() {
+    return this.settings.sortDirection === 'asc';
+  }
 }
