@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
+import { SortDirectionItems } from '../shared/routine-constants';
 
-@Injectable({ providedIn: 'root' })
+@Injectable()
 export class SettingsService {
   private settings: Settings = {
     sortType: '',
@@ -15,7 +16,9 @@ export class SettingsService {
 
   set sortType(sortType: SortType) {
     const sortDirection =
-      this.settings.sortDirection === 'desc' ? 'asc' : 'desc';
+      this.settings.sortDirection === SortDirectionItems.desc
+        ? SortDirectionItems.asc
+        : SortDirectionItems.desc;
     this.settings = {
       ...this.settings,
       sortType,
@@ -44,6 +47,6 @@ export class SettingsService {
   }
 
   get isAscending() {
-    return this.settings.sortDirection === 'asc';
+    return this.settings.sortDirection === SortDirectionItems.asc;
   }
 }

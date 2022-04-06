@@ -1,11 +1,9 @@
 import { Component, HostListener, Input, OnInit } from '@angular/core';
 import { SearchItem } from 'src/app/models/search-item.model';
-
-const breakPoints = {
-  desktop: 1100,
-  tablet: 820,
-  mobile: 540,
-};
+import {
+  ResultsListBreakPoints,
+  ResultsListColumns,
+} from 'src/app/shared/routine-constants';
 
 @Component({
   selector: 'yt-search-results-list',
@@ -15,7 +13,7 @@ const breakPoints = {
 export class SearchResultsListComponent implements OnInit {
   public colsAmount: number | undefined;
 
-  @Input() data: SearchItem[] = [];
+  @Input() public data: SearchItem[] = [];
 
   ngOnInit() {
     this.checkWidth(window.innerWidth);
@@ -28,14 +26,14 @@ export class SearchResultsListComponent implements OnInit {
   }
 
   checkWidth(width: number) {
-    if (width <= breakPoints.mobile) {
-      this.colsAmount = 1;
-    } else if (width <= breakPoints.tablet) {
-      this.colsAmount = 2;
-    } else if (width <= breakPoints.desktop) {
-      this.colsAmount = 3;
+    if (width <= ResultsListBreakPoints.mobile) {
+      this.colsAmount = ResultsListColumns.sm;
+    } else if (width <= ResultsListBreakPoints.tablet) {
+      this.colsAmount = ResultsListColumns.md;
+    } else if (width <= ResultsListBreakPoints.desktop) {
+      this.colsAmount = ResultsListColumns.lg;
     } else {
-      this.colsAmount = 4;
+      this.colsAmount = ResultsListColumns.xl;
     }
   }
 }

@@ -4,6 +4,6 @@
   (setSortType)="setSortType()"
 ></yt-header>
 <yt-search-results-list
-  *ngIf="showResultsList"
-  [data]="results"
+  *ngIf="isActiveResultsList"
+  [data]="resultsList()"
 ></yt-search-results-list>

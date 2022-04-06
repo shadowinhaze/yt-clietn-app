@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { SettingsService } from 'src/app/services/settings.sevice';
+import { SettingsService } from 'src/app/services/settings.service';
 
 @Component({
   selector: 'yt-search-input',
@@ -7,7 +7,7 @@ import { SettingsService } from 'src/app/services/settings.sevice';
   styleUrls: ['./search-input.component.scss'],
 })
 export class SearchInputComponent {
-  @Output() searchValueSubmit = new EventEmitter();
+  @Output() readonly searchValueSubmit = new EventEmitter();
 
   constructor(public settingsService: SettingsService) {}
 

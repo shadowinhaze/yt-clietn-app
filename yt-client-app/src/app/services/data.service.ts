@@ -1,27 +1,49 @@
 import { Injectable } from '@angular/core';
-import youTubeResponse from '../mocks/mock-youtube-response.json';
+import youTubeMockResponse from '../mocks/mock-youtube-response.json';
 import { SearchItem } from '../models/search-item.model';
-import { FilterDataService } from './filter-data-service';
-import { SortDataService } from './sort-data-service';
+import { SortDirectionItems, SortTypeItems } from '../shared/routine-constants';
+import { DateParse } from '../shared/utils';
 
 @Injectable()
 export class DataService {
-  private data: SearchItem[] = youTubeResponse.items;
+  private rawData: SearchItem[] = youTubeMockResponse.items;
 
-  constructor(
-    private sortService: SortDataService,
-    private filterService: FilterDataService
-  ) {}
+  private data: SearchItem[] = [];
 
   get ytData(): SearchItem[] {
     return this.data;
   }
 
-  sortData(data: SearchItem[], type: SortType, direction: SortDirection) {
-    return this.sortService.sort(data, type, direction);
+  constructor() {
+    this.data = [...this.rawData];
   }
 
-  filterData(value: string) {
-    return this.filterService.filter(this.data, value);
+  sortData(type: SortType, direction: SortDirection): void {
+    if (!type) return;
+    const sorted =
+      type === SortTypeItems.date
+        ? [...this.data].sort(
+            (a, b) =>
+              DateParse(a.snippet.publishedAt) -
+              DateParse(b.snippet.publishedAt)
+          )
+        : [...this.data].sort(
+            (a, b) =>
+              Number(a.statistics.viewCount) - Number(b.statistics.viewCount)
+          );
+    this.data =
+      direction === SortDirectionItems.asc ? sorted : sorted.reverse();
+  }
+
+  filterData(value: string): void {
+    this.data = this.rawData.filter((item) => {
+      const searchable = value.trim().toLowerCase();
+      const { channelTitle, title, tags } = item.snippet;
+      return (
+        channelTitle.toLowerCase().includes(searchable) ||
+        title.toLowerCase().includes(searchable) ||
+        tags.includes(searchable)
+      );
+    });
   }
 }

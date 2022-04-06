@@ -1,34 +1,38 @@
 <div class="header-filter">
-  <h3 class="header-filter__label">Sorting by:</h3>
-  <button mat-stroked-button (click)="actionSort('date')">
-    date
-    <!-- TODO reduce html component representation -->
-    <ng-template
-      ytDirectionIcon
-      [condition]="getIconCondition('date')"
-      [isDirAsc]="settingsService.isAscending"
-      [thumbDown]="thumbDown"
-    >
-      <mat-icon>trending_up</mat-icon>
-    </ng-template>
-  </button>
-  <button mat-stroked-button (click)="actionSort('views')">
-    count of views
-    <ng-template
-      ytDirectionIcon
-      [condition]="getIconCondition('views')"
-      [isDirAsc]="settingsService.isAscending"
-      [thumbDown]="thumbDown"
-    >
-      <mat-icon>trending_up</mat-icon>
-    </ng-template>
-  </button>
-  <h3 class="header-filter__label">By word or setance:</h3>
-  <input
-    type="text"
-    [(ngModel)]="settingsService.filterValue"
-    (ngModelChange)="actionFilter($event)"
-  />
+  <div class="header-filter__block">
+    <h3 class="header-filter__label">Sorting by:</h3>
+    <button mat-stroked-button (click)="actionSort(this.sortTypes.date)">
+      date
+      <!-- TODO reduce html component representation -->
+      <ng-template
+        ytDirectionIcon
+        [condition]="getIconCondition(this.sortTypes.date)"
+        [isDirAsc]="settingsService.isAscending"
+        [thumbDown]="thumbDown"
+      >
+        <mat-icon>trending_up</mat-icon>
+      </ng-template>
+    </button>
+    <button mat-stroked-button (click)="actionSort(this.sortTypes.views)">
+      count of views
+      <ng-template
+        ytDirectionIcon
+        [condition]="getIconCondition(this.sortTypes.views)"
+        [isDirAsc]="settingsService.isAscending"
+        [thumbDown]="thumbDown"
+      >
+        <mat-icon>trending_up</mat-icon>
+      </ng-template>
+    </button>
+  </div>
+  <div class="header-filter__block">
+    <h3 class="header-filter__label">By word or sentence:</h3>
+    <input
+      type="text"
+      [(ngModel)]="settingsService.filterValue"
+      (ngModelChange)="actionFilter($event)"
+    />
+  </div>
 </div>
 
 <ng-template #thumbDown>

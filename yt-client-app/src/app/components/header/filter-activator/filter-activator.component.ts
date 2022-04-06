@@ -5,9 +5,9 @@ import { Component, EventEmitter, Output } from '@angular/core';
   templateUrl: './filter-activator.component.html',
 })
 export class FilterActivatorComponent {
-  @Output() showSettings = new EventEmitter();
+  @Output() toggleSettings = new EventEmitter();
 
   action() {
-    this.showSettings.emit();
+    this.toggleSettings.emit();
   }
 }

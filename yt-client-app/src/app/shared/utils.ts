@@ -1,10 +1,21 @@
+import { TimesConstants } from './routine-constants';
+
 const DateParse = (isoDate: Date): number => new Date(isoDate).getTime();
 
 const CountDiffAmongDays = (diffDate: string): number => {
   const today = new Date();
   const publishedDate = new Date(Date.parse(diffDate));
+
+  // Time delta in ms
   const timeDiff = Math.abs(today.getTime() - publishedDate.getTime());
-  return Math.ceil(timeDiff / (1000 * 3600 * 24));
+
+  // Day amount = delta in ms converts to days.
+  return Math.ceil(
+    timeDiff /
+      (TimesConstants.msInSec *
+        TimesConstants.secInHour *
+        TimesConstants.hourInDay)
+  );
 };
 
 export { DateParse, CountDiffAmongDays };

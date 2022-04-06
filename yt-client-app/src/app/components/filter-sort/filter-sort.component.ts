@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { SettingsService } from 'src/app/services/settings.sevice';
+import { SettingsService } from 'src/app/services/settings.service';
+import { SortTypeItems } from 'src/app/shared/routine-constants';
 
 @Component({
   selector: 'yt-filter-sort',
@@ -7,9 +8,14 @@ import { SettingsService } from 'src/app/services/settings.sevice';
   styleUrls: ['./filter-sort.component.scss'],
 })
 export class FilterSortComponent {
-  @Output() sortTypeChange = new EventEmitter();
+  @Output() readonly sortTypeChange = new EventEmitter();
 
-  @Output() filterValueChange = new EventEmitter();
+  @Output() readonly filterValueChange = new EventEmitter();
+
+  readonly sortTypes = {
+    date: SortTypeItems.date,
+    views: SortTypeItems.views,
+  };
 
   constructor(public settingsService: SettingsService) {}
 

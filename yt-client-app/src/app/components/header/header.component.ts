@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { TITLE } from 'src/app/app.component';
-import { SettingsService } from 'src/app/services/settings.sevice';
+import { SettingsService } from 'src/app/services/settings.service';
+import { APP_TITLE } from 'src/app/shared/routine-constants';
 
 @Component({
   selector: 'yt-header',
@@ -8,22 +8,20 @@ import { SettingsService } from 'src/app/services/settings.sevice';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent {
-  public mainTitle = TITLE;
+  public mainTitle = APP_TITLE;
 
-  public searchRequest: string = '';
+  public isActiveSettings: boolean = false;
 
-  public isSettingsActive: boolean = false;
+  @Output() readonly setSortType = new EventEmitter();
 
-  @Output() setSortType = new EventEmitter();
+  @Output() readonly filterValueChange = new EventEmitter();
 
-  @Output() filterValueChange = new EventEmitter();
-
-  @Output() searchValueChange = new EventEmitter();
+  @Output() readonly searchValueChange = new EventEmitter();
 
   constructor(public settingsService: SettingsService) {}
 
-  showSettings() {
-    this.isSettingsActive = !this.isSettingsActive;
+  toggleSettings() {
+    this.isActiveSettings = !this.isActiveSettings;
   }
 
   onFilterValueChange() {
@@ -37,7 +35,7 @@ export class HeaderComponent {
 
   onSearchValueSubmit() {
     this.settingsService.searchValue = 'Angular';
-    this.isSettingsActive = true;
+    this.isActiveSettings = true;
     this.searchValueChange.emit();
   }
 }

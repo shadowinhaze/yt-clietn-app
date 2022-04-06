@@ -1,9 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { SearchItem } from './models/search-item.model';
+import { Component } from '@angular/core';
 import { DataService } from './services/data.service';
-import { SettingsService } from './services/settings.sevice';
-
-const TITLE = 'yt-client-app';
+import { SettingsService } from './services/settings.service';
+import { APP_TITLE } from './shared/routine-constants';
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
@@ -11,39 +9,32 @@ const TITLE = 'yt-client-app';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-class AppComponent implements OnInit {
-  public title = TITLE;
+export class AppComponent {
+  public title = APP_TITLE;
 
-  public results: SearchItem[] = [];
-
-  public showResultsList: boolean = false;
+  public isActiveResultsList: boolean = false;
 
   constructor(
     private dataService: DataService,
     private settingsService: SettingsService
   ) {}
 
-  ngOnInit() {
-    this.results = this.dataService.ytData;
+  resultsList() {
+    return this.dataService.ytData;
   }
 
   filterValueChange() {
-    this.results = this.dataService.filterData(
-      this.settingsService.filterValue
-    );
+    this.dataService.filterData(this.settingsService.filterValue);
   }
 
   setSortType() {
-    this.results = this.dataService.sortData(
-      this.results,
+    this.dataService.sortData(
       this.settingsService.sortType,
       this.settingsService.sortDirection
     );
   }
 
   searchValueChange() {
-    this.showResultsList = true;
+    this.isActiveResultsList = true;
   }
 }
-
-export { TITLE, AppComponent };
