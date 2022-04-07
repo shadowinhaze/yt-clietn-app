@@ -6,7 +6,7 @@
       <!-- TODO reduce html component representation -->
       <ng-template
         ytDirectionIcon
-        [condition]="getIconCondition(this.sortTypes.date)"
+        [isDirShown]="getIconCondition(this.sortTypes.date)"
         [isDirAsc]="settingsService.isAscending"
         [thumbDown]="thumbDown"
       >
@@ -17,7 +17,7 @@
       count of views
       <ng-template
         ytDirectionIcon
-        [condition]="getIconCondition(this.sortTypes.views)"
+        [isDirShown]="getIconCondition(this.sortTypes.views)"
         [isDirAsc]="settingsService.isAscending"
         [thumbDown]="thumbDown"
       >

@@ -10,7 +10,7 @@ import {
   selector: '[ytDirectionIcon]',
 })
 export class DirectionIconDirective implements OnChanges {
-  @Input() condition: boolean = false;
+  @Input() isDirShown: boolean = false;
 
   @Input() isDirAsc: boolean = false;
 
@@ -23,7 +23,7 @@ export class DirectionIconDirective implements OnChanges {
 
   ngOnChanges(): void {
     this.viewContainerRef.clear();
-    if (this.condition) {
+    if (this.isDirShown) {
       if (this.isDirAsc) {
         this.viewContainerRef.createEmbeddedView(this.template);
       } else if (this.thumbDown) {
