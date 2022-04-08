@@ -5,7 +5,7 @@ import {
   OnChanges,
   Renderer2,
 } from '@angular/core';
-import { CountDiffAmongDays } from '../shared/utils';
+import { CountDiffAmongDays } from '../utils/date';
 
 enum CardBorderColorMods {
   red = 'red',

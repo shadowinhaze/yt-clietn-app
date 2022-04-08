@@ -1,9 +1,11 @@
-import { Component, HostListener, Input, OnInit } from '@angular/core';
-import { SearchItem } from 'src/app/models/search-item.model';
+import { Component, HostListener, OnInit } from '@angular/core';
+import { SearchItem } from 'src/app/youtube/models/search-item.model';
 import {
   ResultsListBreakPoints,
   ResultsListColumns,
-} from 'src/app/shared/routine-constants';
+} from 'src/app/shared/constants/shared-constants';
+import { SettingsService } from '../../../core/services/settings.service';
+import { DataService } from '../../services/data.service';
 
 @Component({
   selector: 'yt-search-results-list',
@@ -13,7 +15,25 @@ import {
 export class SearchResultsListComponent implements OnInit {
   public colsAmount: number | undefined;
 
-  @Input() public data: SearchItem[] = [];
+  isShown: boolean = false;
+
+  data: SearchItem[] = [];
+
+  constructor(
+    private dataService: DataService,
+    private settingsService: SettingsService
+  ) {
+    this.settingsService.resultsListShowChange.subscribe((value) => {
+      if (value) {
+        this.data = this.dataService.ytData;
+      }
+      this.isShown = value;
+    });
+
+    this.settingsService.settingsChange.subscribe(() => {
+      this.data = this.dataService.ytData;
+    });
+  }
 
   ngOnInit() {
     this.checkWidth(window.innerWidth);

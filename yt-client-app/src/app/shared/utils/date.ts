@@ -1,4 +1,4 @@
-import { TimesConstants } from './routine-constants';
+import { TimesConstants } from '../constants/shared-constants';
 
 const DateParse = (isoDate: Date): number => new Date(isoDate).getTime();
 

@@ -1,7 +1,8 @@
+import { Subject } from 'rxjs';
 import { Injectable } from '@angular/core';
-import { SortDirectionItems } from '../shared/routine-constants';
+import { SortDirectionItems } from '../../shared/constants/shared-constants';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class SettingsService {
   private settings: Settings = {
     sortType: '',
@@ -9,6 +10,10 @@ export class SettingsService {
     filterValue: '',
     searchValue: '',
   };
+
+  public resultsListShowChange: Subject<boolean> = new Subject<boolean>();
+
+  public settingsChange: Subject<Settings> = new Subject<Settings>();
 
   get sortType() {
     return this.settings.sortType;
@@ -24,6 +29,7 @@ export class SettingsService {
       sortType,
       sortDirection,
     };
+    this.update();
   }
 
   get sortDirection() {
@@ -44,9 +50,20 @@ export class SettingsService {
 
   set searchValue(value: string) {
     this.settings.searchValue = value;
+    this.update();
   }
 
   get isAscending() {
     return this.settings.sortDirection === SortDirectionItems.asc;
+  }
+
+  set isSearchListShown(value: boolean) {
+    if (value && this.settings.searchValue !== '') {
+      this.resultsListShowChange.next(value);
+    }
+  }
+
+  update(): void {
+    this.settingsChange.next({ ...this.settings });
   }
 }

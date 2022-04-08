@@ -1,10 +1,13 @@
 import { Injectable } from '@angular/core';
 import youTubeMockResponse from '../mocks/mock-youtube-response.json';
 import { SearchItem } from '../models/search-item.model';
-import { SortDirectionItems, SortTypeItems } from '../shared/routine-constants';
-import { DateParse } from '../shared/utils';
+import {
+  SortDirectionItems,
+  SortTypeItems,
+} from '../../shared/constants/shared-constants';
+import { DateParse } from '../../shared/utils/date';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class DataService {
   private rawData: SearchItem[] = youTubeMockResponse.items;
 

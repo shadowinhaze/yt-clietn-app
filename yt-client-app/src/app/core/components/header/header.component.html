@@ -18,11 +18,10 @@
       </div>
       <yt-login></yt-login>
     </mat-toolbar-row>
-    <mat-toolbar-row *ngIf="isActiveSettings" class="header__container">
+    <mat-toolbar-row *ngIf="isSettingsActivated" class="header__container">
       <yt-filter-sort
         style="width: 100%"
-        (sortTypeChange)="onSortTypeChange()"
-        (filterValueChange)="onFilterValueChange()"
+        [btnsDisabled]="isSettingsActionDisabled"
       ></yt-filter-sort>
     </mat-toolbar-row>
   </mat-toolbar>
