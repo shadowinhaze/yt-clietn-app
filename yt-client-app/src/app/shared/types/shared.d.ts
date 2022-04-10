@@ -8,3 +8,9 @@ interface Settings {
   filterValue: string;
   searchValue: string;
 }
+
+interface AuthStatus {
+  isLoggedIn: boolean;
+  userName: string;
+  isHeaderActionsDisabled: boolean;
+}

@@ -1,8 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CardBorderColorDirective } from './directives/border-color.directive';
+
+// Pipes and Directives
 import { ReduceNumberPipe } from './pipes/reduce-number.pipe';
+import { CardBorderColorDirective } from './directives/border-color.directive';
 import { DirectionIconDirective } from './directives/direction-icon.directive';
+// ================
 
 @NgModule({
   declarations: [
