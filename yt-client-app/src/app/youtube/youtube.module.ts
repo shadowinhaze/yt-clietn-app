@@ -1,20 +1,25 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-
 // Angular Material
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
+// ================
+
+// Modules
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { YoutubeRoutingModule } from './youtube-routing.module';
+import { SharedModule } from '../shared/shared.module';
 // ================
 
 // Components
 import { SearchResultsListComponent } from './components/search-results-list/search-results-list.component';
 import { SearchResultsItemComponent } from './components/search-results-item/search-results-item.component';
 import { SearchResultsItemMoreComponent } from './components/search-results-item-more/search-results-item-more.component';
-import { SharedModule } from '../shared/shared.module';
+import { SearchResultsPageComponent } from './pages/search-results-page/search-results-page.component';
+import { SearchResultsItemPageComponent } from './pages/search-results-item-page/search-results-item-page.component';
+import { ResultsCardDescriptorComponent } from './components/results-card-descriptor/results-card-descriptor.component';
 // ================
 
 @NgModule({
@@ -22,6 +27,9 @@ import { SharedModule } from '../shared/shared.module';
     SearchResultsListComponent,
     SearchResultsItemComponent,
     SearchResultsItemMoreComponent,
+    SearchResultsPageComponent,
+    SearchResultsItemPageComponent,
+    ResultsCardDescriptorComponent,
   ],
   exports: [
     SearchResultsListComponent,
@@ -30,11 +38,11 @@ import { SharedModule } from '../shared/shared.module';
   ],
   imports: [
     CommonModule,
+    YoutubeRoutingModule,
     SharedModule,
     MatGridListModule,
     MatToolbarModule,
     MatCardModule,
-    MatInputModule,
     MatButtonModule,
     MatIconModule,
   ],

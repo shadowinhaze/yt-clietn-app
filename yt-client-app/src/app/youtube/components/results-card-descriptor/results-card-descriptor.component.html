@@ -1,0 +1,18 @@
+<div class="results-card__descriptors" *ngIf="card">
+  <div class="descriptor results-card__descriptor">
+    <mat-icon class="descriptor__icon">visibility</mat-icon>
+    <span>{{ card.statistics.viewCount | reduceNumber }}</span>
+  </div>
+  <div class="descriptor results-card__descriptor">
+    <mat-icon class="descriptor__icon">thumb_up</mat-icon>
+    <span>{{ card.statistics.likeCount | reduceNumber }}</span>
+  </div>
+  <div class="descriptor results-card__descriptor">
+    <mat-icon class="descriptor__icon">thumb_down</mat-icon>
+    <span>{{ card.statistics.dislikeCount | reduceNumber }}</span>
+  </div>
+  <div class="descriptor results-card__descriptor">
+    <mat-icon class="descriptor__icon">comment</mat-icon>
+    <span>{{ card.statistics.commentCount | reduceNumber }}</span>
+  </div>
+</div>

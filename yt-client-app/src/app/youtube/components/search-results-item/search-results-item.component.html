@@ -6,32 +6,20 @@
     alt="{{ card.snippet.channelTitle }} | {{ card.snippet.title }}"
   />
   <mat-card-content class="results-card__content">
-    <div class="results-card__descriptors">
-      <div class="descriptor results-card__descriptor">
-        <mat-icon class="descriptor__icon">visibility</mat-icon>
-        <span>{{ card.statistics.viewCount | reduceNumber }}</span>
-      </div>
-      <div class="descriptor results-card__descriptor">
-        <mat-icon class="descriptor__icon">thumb_up</mat-icon>
-        <span>{{ card.statistics.likeCount | reduceNumber }}</span>
-      </div>
-      <div class="descriptor results-card__descriptor">
-        <mat-icon class="descriptor__icon">thumb_down</mat-icon>
-        <span>{{ card.statistics.dislikeCount | reduceNumber }}</span>
-      </div>
-      <div class="descriptor results-card__descriptor">
-        <mat-icon class="descriptor__icon">comment</mat-icon>
-        <span>{{ card.statistics.commentCount | reduceNumber }}</span>
-      </div>
-    </div>
+    <yt-results-card-descriptor [card]="card"></yt-results-card-descriptor>
   </mat-card-content>
   <mat-card-title class="results-card__title">{{
     card.snippet.title
   }}</mat-card-title>
   <mat-card-actions class="results-card__actions">
-    <button mat-raised-button color="primary" class="results-card__action">
+    <a
+      [routerLink]="card.id"
+      mat-raised-button
+      color="primary"
+      class="results-card__action"
+    >
       more...
-    </button>
+    </a>
   </mat-card-actions>
   <mat-card-footer class="results-card__footer">
     <div

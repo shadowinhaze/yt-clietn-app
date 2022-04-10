@@ -1,1 +1,36 @@
-<p>search-results-item-more works!</p>
+<mat-card class="results-card-full" *ngIf="card">
+  <button
+    mat-mini-fab
+    color="primary"
+    aria-label="Go back to the card list"
+    routerLink=".."
+    class="results-card-full__back"
+  >
+    <mat-icon>arrow_back_ios_new</mat-icon>
+  </button>
+  <img
+    class="results-card-full__thumbnail"
+    src="{{ card.snippet.thumbnails['maxres'].url }}"
+    alt="{{ card.snippet.channelTitle }} | {{ card.snippet.title }}"
+  />
+  <mat-card-title class="results-card-full__title"
+    ><h2>{{ card.snippet.title }}</h2></mat-card-title
+  >
+  <mat-card-subtitle class="results-card-full__date"
+    ><time>{{
+      card.snippet.publishedAt | date: 'fullDate'
+    }}</time></mat-card-subtitle
+  >
+  <mat-card-content class="results-card-full__content">
+    <h3>Description:</h3>
+    <p>{{ card.snippet.description }}</p>
+  </mat-card-content>
+  <mat-card-footer class="results-card-full__footer">
+    <yt-results-card-descriptor [card]="card"></yt-results-card-descriptor>
+    <div
+      class="results-card-full__indicator"
+      ytCardBorderColor
+      publishedDate="{{ card.snippet.publishedAt }}"
+    ></div>
+  </mat-card-footer>
+</mat-card>
