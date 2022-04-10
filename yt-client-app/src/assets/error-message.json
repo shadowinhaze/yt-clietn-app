@@ -1,0 +1,12 @@
+{
+  "login": {
+    "req": "You must enter the login value",
+    "length": "Your login value must contain at least 4 symbols",
+    "unknown": "There is a problem with yout login value"
+  },
+  "pass": {
+    "req": "You must enter the password",
+    "length": "Your password must contain at least 5 symbols",
+    "unknown": "There is a problem with yout password"
+  }
+}
