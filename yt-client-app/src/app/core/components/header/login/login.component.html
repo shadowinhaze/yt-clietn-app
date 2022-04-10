@@ -1,6 +1,23 @@
 <div class="header-login">
-  <a mat-button color="primary" class="header-login__button">
+  <button
+    *ngIf="!params.isLoggedIn"
+    mat-button
+    color="primary"
+    class="header-login__button"
+    (click)="goToSignIn()"
+  >
     <mat-icon>account_circle</mat-icon>
-    Sign Up
-  </a>
+    Sing in
+  </button>
+  <mat-chip
+    class="header-login__chip"
+    *ngIf="params.isLoggedIn"
+    (click)="onLogOut()"
+    #tooltip="matTooltip"
+    matTooltip="Click to log out"
+    [matTooltipPosition]="'below'"
+    matTooltipHideDelay="200"
+    ><span>{{ params.userName[0].toUpperCase() }}</span
+    >{{ params.userName }}</mat-chip
+  >
 </div>

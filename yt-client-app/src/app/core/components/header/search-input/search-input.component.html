@@ -8,6 +8,7 @@
       placeholder="What are you want to find out?"
       [value]="settingsService.searchValue"
       autocomplete="off"
+      [disabled]="disabled"
     />
   </mat-form-field>
   <button
@@ -15,6 +16,7 @@
     class="search-form__submit"
     color="primary"
     (click)="action()"
+    [disabled]="disabled"
   >
     Search
   </button>

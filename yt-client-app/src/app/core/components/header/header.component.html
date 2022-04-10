@@ -2,21 +2,27 @@
   <mat-toolbar class="header__toolbar">
     <mat-toolbar-row class="header__container">
       <div class="header__subcontainer">
-        <div class="header__logo">
+        <div class="header__logo" (click)="navigateToMain()">
           <h1 class="header__logo__title header__logo__title_hidden">
             {{ mainTitle }}
           </h1>
-          <img src="assets/yt-logo.svg" alt="{{ mainTitle }} Logotype" />
+          <img
+            src="assets/yt-logo.svg"
+            alt="{{ mainTitle }} Logotype"
+            class="header__logo__image"
+          />
         </div>
         <yt-search-input
           style="flex-grow: 2"
           (searchValueSubmit)="onSearchValueSubmit()"
+          [disabled]="this.authStatus.isHeaderActionsDisabled"
         ></yt-search-input>
         <yt-filter-activator
           (toggleSettings)="toggleSettings()"
+          [disabled]="this.authStatus.isHeaderActionsDisabled"
         ></yt-filter-activator>
       </div>
-      <yt-login></yt-login>
+      <yt-login [params]="this.authStatus" (logOut)="logOut()"></yt-login>
     </mat-toolbar-row>
     <mat-toolbar-row *ngIf="isSettingsActivated" class="header__container">
       <yt-filter-sort
