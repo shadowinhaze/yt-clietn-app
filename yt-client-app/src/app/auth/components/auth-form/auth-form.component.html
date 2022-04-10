@@ -1,0 +1,51 @@
+<mat-card class="auth-form">
+  <mat-card-title><h2>Login</h2></mat-card-title>
+  <mat-card-content>
+    <form class="auth-form__inputs" [formGroup]="form" (ngSubmit)="logIn()">
+      <mat-form-field appearance="outline">
+        <mat-label>Enter your login</mat-label>
+        <input
+          matInput
+          placeholder="John Doe"
+          formControlName="login"
+          required
+        />
+        <mat-error *ngIf="login?.invalid">{{
+          getErrorMessage('login')
+        }}</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Enter your password</mat-label>
+        <input
+          matInput
+          [type]="isPassHidden ? 'password' : 'text'"
+          formControlName="pass"
+          required
+        />
+        <button
+          mat-icon-button
+          matSuffix
+          (click)="isPassHidden = !isPassHidden"
+          [attr.aria-label]="'isPassVisible password'"
+          [attr.aria-pressed]="isPassHidden"
+        >
+          <mat-icon>{{
+            isPassHidden ? 'visibility_off' : 'visibility'
+          }}</mat-icon>
+        </button>
+        <mat-error *ngIf="pass?.invalid">{{
+          getErrorMessage('pass')
+        }}</mat-error>
+      </mat-form-field>
+      <button
+        mat-raised-button
+        class="search-form__submit"
+        color="primary"
+        type="submit"
+        [disabled]="isInvalid"
+      >
+        Login
+      </button>
+    </form>
+  </mat-card-content>
+</mat-card>
