@@ -13,12 +13,12 @@ export class DataService {
 
   private data: SearchItem[] = [];
 
-  get ytData(): SearchItem[] {
-    return this.data;
-  }
-
   constructor() {
     this.data = [...this.rawData];
+  }
+
+  get ytData(): SearchItem[] {
+    return this.data;
   }
 
   sortData(type: SortType, direction: SortDirection): void {
@@ -48,5 +48,9 @@ export class DataService {
         tags.includes(searchable)
       );
     });
+  }
+
+  getItem(id: string) {
+    return this.data.find((item) => item.id === id);
   }
 }
