@@ -68,7 +68,7 @@ export class AuthFormComponent {
   }
 
   logIn() {
-    this.auth.user = this.loginForm.value.login;
+    this.auth.userLogin = this.loginForm.value.login;
     this.auth.logIn();
   }
 

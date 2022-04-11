@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Router } from '@angular/router';
+import { Paths } from 'src/app/shared/constants/shared-constants';
 
 @Component({
   selector: 'yt-login',
@@ -9,19 +10,21 @@ import { Router } from '@angular/router';
 export class LoginComponent {
   constructor(private router: Router) {}
 
-  @Input() params: AuthStatus = {
-    isLoggedIn: false,
-    userName: '',
-    isHeaderActionsDisabled: true,
-  };
+  @Input() public isAuthorized: boolean = false;
 
-  @Output() logOut = new EventEmitter();
+  @Input() public userLogin: string = '';
+
+  @Output() readonly logOut = new EventEmitter();
 
   onLogOut() {
     this.logOut.emit();
   }
 
+  get loginFirstLetter() {
+    return this.userLogin[0].toUpperCase();
+  }
+
   goToSignIn() {
-    this.router.navigate(['/', 'auth', 'sign-in']);
+    this.router.navigate([Paths.home, Paths.auth, Paths.signIn]);
   }
 }

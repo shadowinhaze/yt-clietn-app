@@ -1,6 +1,6 @@
 <div class="header-login">
   <button
-    *ngIf="!params.isLoggedIn"
+    *ngIf="!isAuthorized"
     mat-button
     color="primary"
     class="header-login__button"
@@ -11,13 +11,13 @@
   </button>
   <mat-chip
     class="header-login__chip"
-    *ngIf="params.isLoggedIn"
+    *ngIf="isAuthorized"
     (click)="onLogOut()"
     #tooltip="matTooltip"
     matTooltip="Click to log out"
     [matTooltipPosition]="'below'"
     matTooltipHideDelay="200"
-    ><span>{{ params.userName[0].toUpperCase() }}</span
-    >{{ params.userName }}</mat-chip
+    ><span>{{ loginFirstLetter }}</span
+    >{{ userLogin }}</mat-chip
   >
 </div>

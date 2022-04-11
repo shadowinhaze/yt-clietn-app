@@ -6,37 +6,37 @@ import { FAKE_AUTH_TOKEN } from 'src/app/shared/constants/shared-constants';
   providedIn: 'root',
 })
 export class AuthService {
-  private authStatus = false;
+  private isAuthorized = false;
 
   public authChange: Subject<boolean> = new Subject<boolean>();
 
-  private userLogin: string = '';
+  private user: string = '';
 
   constructor() {
     this.init();
   }
 
-  get status() {
-    return this.authStatus;
+  get isAuth() {
+    return this.isAuthorized;
   }
 
-  get user() {
-    return this.userLogin;
+  get userLogin() {
+    return this.user;
   }
 
-  set user(value: string) {
-    this.userLogin = value;
+  set userLogin(value: string) {
+    this.user = value;
   }
 
   init() {
     if (localStorage['authToken']) {
-      this.authStatus = true;
+      this.isAuthorized = true;
       this.authChange.next(localStorage['authToken']);
       this.userLogin = localStorage['userName'];
     }
 
     this.authChange.subscribe((status) => {
-      this.authStatus = status;
+      this.isAuthorized = status;
     });
   }
 

@@ -15,16 +15,20 @@
         <yt-search-input
           style="flex-grow: 2"
           (searchValueSubmit)="onSearchValueSubmit()"
-          [disabled]="this.authStatus.isHeaderActionsDisabled"
+          [disabled]="this.authParams.isHeaderActionsDisabled"
         ></yt-search-input>
         <yt-filter-activator
           (toggleSettings)="toggleSettings()"
-          [disabled]="this.authStatus.isHeaderActionsDisabled"
+          [disabled]="this.authParams.isHeaderActionsDisabled"
         ></yt-filter-activator>
       </div>
-      <yt-login [params]="this.authStatus" (logOut)="logOut()"></yt-login>
+      <yt-login
+        [isAuthorized]="this.authParams.isAuthorized"
+        [userLogin]="this.authParams.userLogin"
+        (logOut)="logOut()"
+      ></yt-login>
     </mat-toolbar-row>
-    <mat-toolbar-row *ngIf="isSettingsActivated" class="header__container">
+    <mat-toolbar-row *ngIf="isSettingsPanelActivated" class="header__container">
       <yt-filter-sort
         style="width: 100%"
         [btnsDisabled]="isSettingsActionDisabled"
