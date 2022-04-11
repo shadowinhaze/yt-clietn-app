@@ -1,27 +1,64 @@
 import { Injectable } from '@angular/core';
-import { CanLoad, Router, UrlTree } from '@angular/router';
-// import { CanLoad, Route, UrlSegment, UrlTree } from '@angular/router';
+import {
+  ActivatedRouteSnapshot,
+  CanActivate,
+  CanLoad,
+  Route,
+  Router,
+  UrlTree,
+} from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/auth/services/auth.service';
+import { Paths } from 'src/app/shared/constants/shared-constants';
 
 @Injectable({
   providedIn: 'root',
 })
-export class AuthGuard implements CanLoad {
-  private isLoggedIn = false;
+export class AuthGuard implements CanLoad, CanActivate {
+  private isAuthorized = false;
 
   constructor(private router: Router, private auth: AuthService) {
-    this.isLoggedIn = auth.status;
+    this.isAuthorized = auth.isAuth;
     this.auth.authChange.subscribe((status) => {
-      this.isLoggedIn = status;
+      this.isAuthorized = status;
     });
   }
 
-  canLoad():
-    | Observable<boolean | UrlTree>
-    | Promise<boolean | UrlTree>
+  canActivate(
+    route: ActivatedRouteSnapshot
+  ):
     | boolean
-    | UrlTree {
-    return this.isLoggedIn || this.router.createUrlTree(['/', 'auth']);
+    | UrlTree
+    | Observable<boolean | UrlTree>
+    | Promise<boolean | UrlTree> {
+    switch (route.url[0].path) {
+      case Paths.notFound:
+        return this.isAuthorized || this.router.createUrlTree([Paths.auth]);
+      case Paths.auth:
+        return !this.isAuthorized || this.router.createUrlTree([Paths.home]);
+      default:
+        return (
+          this.isAuthorized ||
+          this.router.createUrlTree([Paths.home, Paths.auth])
+        );
+    }
+  }
+
+  canLoad(
+    route: Route
+  ):
+    | boolean
+    | UrlTree
+    | Observable<boolean | UrlTree>
+    | Promise<boolean | UrlTree> {
+    switch (route.path) {
+      case Paths.auth:
+        return !this.isAuthorized || this.router.createUrlTree([Paths.home]);
+      default:
+        return (
+          this.isAuthorized ||
+          this.router.createUrlTree([Paths.home, Paths.auth])
+        );
+    }
   }
 }

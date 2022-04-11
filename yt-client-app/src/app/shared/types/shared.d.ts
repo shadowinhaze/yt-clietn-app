@@ -9,8 +9,8 @@ interface Settings {
   searchValue: string;
 }
 
-interface AuthStatus {
-  isLoggedIn: boolean;
-  userName: string;
+interface AuthParams {
+  isAuthorized: boolean;
+  userLogin: string;
   isHeaderActionsDisabled: boolean;
 }
