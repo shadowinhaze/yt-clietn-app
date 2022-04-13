@@ -1,20 +1,26 @@
 @import '../../../shared/styles/shared-styles.scss';
 
+$thumbnail-area: thumbnail;
+$title-area: title;
+$date-area: date;
+$content-area: content;
+$footer-area: footer;
+
 .results-card-full {
   display: grid;
   max-width: 1200px;
   margin: 2em auto;
   padding: 1em;
   grid-template-areas:
-    'thumbnail title date'
-    'thumbnail content content'
-    'thumbnail footer footer';
+  '#{$thumbnail-area} #{$title-area} #{$date-area}'
+  '#{$thumbnail-area} #{$content-area} #{$content-area}'
+  '#{$thumbnail-area} #{$footer-area} #{$footer-area}';
   grid-template-columns: 60% auto auto;
   column-gap: 2em;
   align-items: center;
 
   &__thumbnail {
-    grid-area: thumbnail;
+    grid-area: $thumbnail-area;
     height: 100%;
     max-width: 100%;
     object-fit: contain;
@@ -23,8 +29,9 @@
   }
 
   &__title {
-    grid-area: title;
+    grid-area: $title-area;
     align-self: start;
+
     h2 {
       font-weight: 700;
       font-size: 24px;
@@ -33,7 +40,7 @@
   }
 
   &__date {
-    grid-area: date;
+    grid-area: $date-area;
     align-self: start;
     justify-self: end;
   }
@@ -42,8 +49,8 @@
     grid-area: content;
     font-weight: 400;
     font-size: 16px;
-    // line-height: 14px;
     color: $d-gray;
+
     h3 {
       text-transform: uppercase;
       color: $grey;
@@ -54,7 +61,7 @@
   &__footer {
     width: 100%;
     margin: 0;
-    grid-area: footer;
+    grid-area: $footer-area;
   }
 
   &__back {
@@ -71,17 +78,25 @@
     top: 0;
     left: 0;
     border-radius: 4px;
-    &_green {
-      box-shadow: 0.5em 0.5em 1em $green;
+
+    @mixin boxShadow($color) {
+      box-shadow: 0.5em 0.5em 1em $color;
     }
-    &_red {
-      box-shadow: 0.5em 0.5em 1em $red;
+
+    &_color_green {
+      @include boxShadow($green);
     }
-    &_blue {
-      box-shadow: 0.5em 0.5em 1em $blue;
+
+    &_color_red {
+      @include boxShadow($red);
     }
-    &_transparent {
-      box-shadow: 0.5em 0.5em 1em $grey;
+
+    &_color_blue {
+      @include boxShadow($blue);
+    }
+
+    &_color_transparent {
+      @include boxShadow($grey);
     }
   }
 }

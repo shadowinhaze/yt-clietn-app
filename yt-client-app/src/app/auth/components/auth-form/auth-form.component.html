@@ -1,7 +1,11 @@
 <mat-card class="auth-form">
   <mat-card-title><h2>Login</h2></mat-card-title>
   <mat-card-content>
-    <form class="auth-form__inputs" [formGroup]="form" (ngSubmit)="logIn()">
+    <form
+      class="auth-form__inputs"
+      [formGroup]="loginForm"
+      (ngSubmit)="logIn()"
+    >
       <mat-form-field appearance="outline">
         <mat-label>Enter your login</mat-label>
         <input
@@ -11,7 +15,7 @@
           required
         />
         <mat-error *ngIf="login?.invalid">{{
-          getErrorMessage('login')
+          getErrorMessageText('login')
         }}</mat-error>
       </mat-form-field>
       <mat-form-field appearance="outline">
@@ -34,7 +38,7 @@
           }}</mat-icon>
         </button>
         <mat-error *ngIf="pass?.invalid">{{
-          getErrorMessage('pass')
+          getErrorMessageText('pass')
         }}</mat-error>
       </mat-form-field>
       <button
@@ -42,7 +46,7 @@
         class="search-form__submit"
         color="primary"
         type="submit"
-        [disabled]="isInvalid"
+        [disabled]="this.loginForm.invalid"
       >
         Login
       </button>

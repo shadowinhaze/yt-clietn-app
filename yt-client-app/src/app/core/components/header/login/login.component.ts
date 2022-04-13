@@ -12,7 +12,7 @@ export class LoginComponent {
 
   @Input() public isAuthorized: boolean = false;
 
-  @Input() public userLogin: string = '';
+  @Input() public userLogin: string | null = null;
 
   @Output() readonly logOut = new EventEmitter();
 
@@ -21,7 +21,8 @@ export class LoginComponent {
   }
 
   get loginFirstLetter() {
-    return this.userLogin[0].toUpperCase();
+    if (this.userLogin) return this.userLogin[0].toUpperCase();
+    return null;
   }
 
   goToSignIn() {

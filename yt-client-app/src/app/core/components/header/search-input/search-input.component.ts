@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { SettingsService } from 'src/app/core/services/settings.service';
 
 @Component({
   selector: 'yt-search-input',
@@ -7,13 +6,16 @@ import { SettingsService } from 'src/app/core/services/settings.service';
   styleUrls: ['./search-input.component.scss'],
 })
 export class SearchInputComponent {
-  @Input() disabled: boolean = true;
+  @Input() searchValue = '';
 
-  @Output() readonly searchValueSubmit = new EventEmitter();
+  @Output() readonly searchValueSubmit = new EventEmitter<string>();
 
-  constructor(public settingsService: SettingsService) {}
+  onSearchValueChange(e: Event) {
+    const target = e.target as HTMLInputElement;
+    this.searchValue = target.value;
+  }
 
-  action() {
-    this.searchValueSubmit.emit();
+  onSearchValueSubmit() {
+    this.searchValueSubmit.emit(this.searchValue);
   }
 }

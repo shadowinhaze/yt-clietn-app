@@ -1,11 +1,7 @@
 <div class="header-filter">
   <div class="header-filter__block">
     <h3 class="header-filter__label">Sorting by:</h3>
-    <button
-      mat-stroked-button
-      (click)="setSortType(this.sortTypes.date)"
-      [disabled]="btnsDisabled"
-    >
+    <button mat-stroked-button (click)="setSortType(this.sortTypes.date)">
       date
       <!-- TODO reduce html component representation -->
       <ng-template
@@ -17,11 +13,7 @@
         <mat-icon>trending_up</mat-icon>
       </ng-template>
     </button>
-    <button
-      mat-stroked-button
-      (click)="setSortType(this.sortTypes.views)"
-      [disabled]="btnsDisabled"
-    >
+    <button mat-stroked-button (click)="setSortType(this.sortTypes.views)">
       count of views
       <ng-template
         ytDirectionIcon
@@ -39,7 +31,6 @@
       type="text"
       [(ngModel)]="settingsService.filterValue"
       (ngModelChange)="setFilter($event)"
-      [disabled]="btnsDisabled"
     />
   </div>
 </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { SettingsService } from 'src/app/core/services/settings.service';
@@ -9,63 +9,40 @@ import { APP_TITLE, Paths } from 'src/app/shared/constants/shared-constants';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
   readonly mainTitle = APP_TITLE;
 
-  public isSettingsPanelActivated: boolean = false;
+  public isSettingsPanelShown: boolean = false;
 
-  public isSettingsActionDisabled: boolean = true;
-
-  public authParams: AuthParams = {
-    isAuthorized: false,
-    userLogin: '',
-    isHeaderActionsDisabled: true,
-  };
-
-  public isOnSingIn: boolean = false;
+  public searchValue = '';
 
   constructor(
     public settingsService: SettingsService,
-    private router: Router,
-    private auth: AuthService
+    public auth: AuthService,
+    private router: Router
   ) {}
 
-  ngOnInit(): void {
-    this.authParams = {
-      isAuthorized: this.auth.isAuth,
-      userLogin: this.auth.userLogin,
-      isHeaderActionsDisabled: !this.auth.isAuth,
-    };
-
-    this.auth.authChange.subscribe((status) => {
-      this.authParams = {
-        isAuthorized: status,
-        userLogin: this.auth.userLogin,
-        isHeaderActionsDisabled: !status,
-      };
-    });
-  }
-
   toggleSettings() {
-    this.isSettingsPanelActivated = !this.isSettingsPanelActivated;
-  }
-
-  onSearchValueSubmit() {
-    this.settingsService.searchValue = 'Angular';
-    this.isSettingsPanelActivated = true;
-    this.isSettingsActionDisabled = false;
-    this.settingsService.isSearchListShown = true;
+    this.isSettingsPanelShown = !this.isSettingsPanelShown;
   }
 
   navigateToMain(): void {
-    if (!this.authParams.isAuthorized) return;
-    this.router.navigate([Paths.home]);
+    if (this.auth.isAuthorized) this.router.navigate([Paths.home]);
+  }
+
+  private setSettings({ type, value }: { type: boolean; value: string }) {
+    this.settingsService.searchValue = value;
+    this.searchValue = value;
+    this.isSettingsPanelShown = type;
+    this.settingsService.isSearchListShown = type;
+  }
+
+  onSearchValueSubmit(value: string) {
+    this.setSettings({ type: true, value });
   }
 
   logOut() {
     this.auth.logOut();
-    this.isSettingsPanelActivated = false;
-    this.isSettingsActionDisabled = true;
-    this.router.navigate([Paths.home, Paths.auth]);
+    this.setSettings({ type: false, value: '' });
   }
 }

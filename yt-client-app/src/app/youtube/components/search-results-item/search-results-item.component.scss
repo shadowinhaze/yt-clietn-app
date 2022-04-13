@@ -53,16 +53,20 @@
     width: 100%;
     height: 5px;
     border-radius: 0 0 4px 4px;
-    &_green {
+
+    &_color_green {
       background-color: $green;
     }
-    &_red {
+
+    &_color_red {
       background-color: $red;
     }
-    &_blue {
+
+    &_color_blue {
       background-color: $blue;
     }
-    &_transparent {
+
+    &_color_transparent {
       background-color: $grey;
     }
   }

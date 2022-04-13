@@ -1,4 +1,4 @@
-<mat-card class="results-card-full" *ngIf="card">
+<mat-card class="results-card-full" *ngIf="card | async as card">
   <button
     mat-mini-fab
     color="primary"

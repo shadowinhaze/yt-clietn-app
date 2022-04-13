@@ -50,7 +50,7 @@ export class DataService {
     });
   }
 
-  getItem(id: string) {
-    return this.data.find((item) => item.id === id);
+  getItemById(id: string): SearchItem {
+    return this.data.find((item) => item.id === id)!;
   }
 }

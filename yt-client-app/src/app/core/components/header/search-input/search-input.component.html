@@ -5,18 +5,20 @@
       matInput
       class="search-form__input"
       type="search"
-      placeholder="What are you want to find out?"
-      [value]="settingsService.searchValue"
+      placeholder="What
+    are you want to find out?"
       autocomplete="off"
-      [disabled]="disabled"
+      [value]="searchValue"
+      (change)="onSearchValueChange($event)"
+      name="search"
     />
   </mat-form-field>
   <button
     mat-raised-button
     class="search-form__submit"
     color="primary"
-    (click)="action()"
-    [disabled]="disabled"
+    type="submit"
+    (click)="onSearchValueSubmit()"
   >
     Search
   </button>

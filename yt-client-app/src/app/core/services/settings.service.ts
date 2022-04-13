@@ -15,6 +15,14 @@ export class SettingsService {
 
   public settingsChange: Subject<Settings> = new Subject<Settings>();
 
+  private isResultsListShown: boolean = false;
+
+  constructor() {
+    this.resultsListShowChange.subscribe((status) => {
+      this.isResultsListShown = status;
+    });
+  }
+
   get sortType() {
     return this.settings.sortType;
   }
@@ -57,9 +65,15 @@ export class SettingsService {
     return this.settings.sortDirection === SortDirectionItems.asc;
   }
 
+  get isSearchListShown() {
+    return this.isResultsListShown;
+  }
+
   set isSearchListShown(value: boolean) {
     if (value && this.settings.searchValue !== '') {
-      this.resultsListShowChange.next(value);
+      this.resultsListShowChange.next(true);
+    } else {
+      this.resultsListShowChange.next(false);
     }
   }
 

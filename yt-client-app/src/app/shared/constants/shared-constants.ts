@@ -46,3 +46,21 @@ export enum LoginForm {
 
 export const FAKE_AUTH_TOKEN =
   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL2V4YW1wbGUuYXV0aDAuY29tLyIsImF1ZCI6Imh0dHBzOi8vYXBpLmV4YW1wbGUuY29tL2NhbGFuZGFyL3YxLyIsInN1YiI6InVzcl8xMjMiLCJpYXQiOjE0NTg3ODU3OTYsImV4cCI6MTQ1ODg3MjE5Nn0.CA7eaHjIHz5NxeIJoFK9krqaeZrPLwmMmgI_XiQiIkQ';
+
+export const ERROR_MESSAGES = {
+  login: {
+    req: 'You must enter the login value',
+    length: 'Your login value must contain at least 4 symbols',
+    unknown: 'There is a problem with yout login value',
+  },
+  pass: {
+    req: 'You must enter the password',
+    length: 'Your password must contain at least 5 symbols',
+    unknown: 'There is a problem with yout password',
+  },
+};
+
+export enum LocalStorageKeys {
+  token = 'authToken',
+  name = 'userName',
+}

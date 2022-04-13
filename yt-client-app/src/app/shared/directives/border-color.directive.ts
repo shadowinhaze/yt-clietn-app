@@ -20,6 +20,8 @@ enum CalendarConstants {
   halfYear = 182,
 }
 
+const colorModificatorKey = 'color';
+
 @Directive({
   selector: '[ytCardBorderColor]',
 })
@@ -34,7 +36,7 @@ export class CardBorderColorDirective implements OnChanges {
     this.countDate();
     this.renderer.addClass(
       this.elementRef.nativeElement,
-      `${this.elementRef.nativeElement.className}_${this.cardBorderColorMod}`
+      `${this.elementRef.nativeElement.className}_${colorModificatorKey}_${this.cardBorderColorMod}`
     );
   }
 

@@ -13,26 +13,30 @@
           />
         </div>
         <yt-search-input
+          *ngIf="this.auth.isAuthorized"
           style="flex-grow: 2"
-          (searchValueSubmit)="onSearchValueSubmit()"
-          [disabled]="this.authParams.isHeaderActionsDisabled"
+          [searchValue]="searchValue"
+          (searchValueSubmit)="onSearchValueSubmit($event)"
         ></yt-search-input>
-        <yt-filter-activator
-          (toggleSettings)="toggleSettings()"
-          [disabled]="this.authParams.isHeaderActionsDisabled"
-        ></yt-filter-activator>
+        <button
+          mat-mini-fab
+          color="primary"
+          aria-label="Application sorting and filtering parametres"
+          (click)="toggleSettings()"
+          *ngIf="this.auth.isAuthorized"
+          [disabled]="!settingsService.isSearchListShown"
+        >
+          <mat-icon>sort</mat-icon>
+        </button>
       </div>
       <yt-login
-        [isAuthorized]="this.authParams.isAuthorized"
-        [userLogin]="this.authParams.userLogin"
+        [isAuthorized]="this.auth.isAuthorized"
+        [userLogin]="this.auth.userLogin"
         (logOut)="logOut()"
       ></yt-login>
     </mat-toolbar-row>
-    <mat-toolbar-row *ngIf="isSettingsPanelActivated" class="header__container">
-      <yt-filter-sort
-        style="width: 100%"
-        [btnsDisabled]="isSettingsActionDisabled"
-      ></yt-filter-sort>
+    <mat-toolbar-row *ngIf="isSettingsPanelShown" class="header__container">
+      <yt-filter-sort style="width: 100%"></yt-filter-sort>
     </mat-toolbar-row>
   </mat-toolbar>
 </header>

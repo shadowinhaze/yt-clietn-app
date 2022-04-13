@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { SettingsService } from 'src/app/core/services/settings.service';
 import { SortTypeItems } from 'src/app/shared/constants/shared-constants';
 import { DataService } from 'src/app/youtube/services/data.service';
@@ -13,8 +13,6 @@ export class FilterSortComponent {
     date: SortTypeItems.date,
     views: SortTypeItems.views,
   };
-
-  @Input() btnsDisabled = true;
 
   constructor(
     public settingsService: SettingsService,

@@ -1,55 +1,54 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
-import { FAKE_AUTH_TOKEN } from 'src/app/shared/constants/shared-constants';
+import {
+  FAKE_AUTH_TOKEN,
+  LocalStorageKeys,
+  Paths,
+} from 'src/app/shared/constants/shared-constants';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private isAuthorized = false;
+  private user: string | null = null;
 
-  public authChange: Subject<boolean> = new Subject<boolean>();
+  public userChange: Subject<string | null> = new Subject<string | null>();
 
-  private user: string = '';
-
-  constructor() {
+  constructor(private router: Router) {
     this.init();
   }
 
-  get isAuth() {
-    return this.isAuthorized;
-  }
-
-  get userLogin() {
+  get userLogin(): string | null {
     return this.user;
   }
 
-  set userLogin(value: string) {
-    this.user = value;
+  get isAuthorized(): boolean {
+    return Boolean(this.user);
   }
 
-  init() {
-    if (localStorage['authToken']) {
-      this.isAuthorized = true;
-      this.authChange.next(localStorage['authToken']);
-      this.userLogin = localStorage['userName'];
+  init(): void {
+    if (localStorage[LocalStorageKeys.token]) {
+      const name = localStorage[LocalStorageKeys.name];
+      this.user = name;
+      this.userChange.next(name);
     }
 
-    this.authChange.subscribe((status) => {
-      this.isAuthorized = status;
+    this.userChange.subscribe((name) => {
+      this.user = name;
+      if (!name) this.router.navigate([Paths.home, Paths.auth]);
     });
   }
 
-  logIn() {
-    this.authChange.next(true);
-    localStorage.setItem('authToken', FAKE_AUTH_TOKEN);
-    localStorage.setItem('userName', this.userLogin);
+  logIn(userName: string) {
+    this.userChange.next(userName);
+    localStorage.setItem(LocalStorageKeys.token, FAKE_AUTH_TOKEN);
+    localStorage.setItem(LocalStorageKeys.name, userName);
   }
 
   logOut() {
-    this.authChange.next(false);
-    this.userLogin = '';
-    localStorage.removeItem('authToken');
-    localStorage.removeItem('userName');
+    this.userChange.next(null);
+    localStorage.removeItem(LocalStorageKeys.token);
+    localStorage.removeItem(LocalStorageKeys.name);
   }
 }

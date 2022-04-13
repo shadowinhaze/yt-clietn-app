@@ -17,7 +17,6 @@ import { SharedModule } from '../shared/shared.module';
 // Components
 import { HeaderComponent } from './components/header/header.component';
 import { SearchInputComponent } from './components/header/search-input/search-input.component';
-import { FilterActivatorComponent } from './components/header/filter-activator/filter-activator.component';
 import { LoginComponent } from './components/header/login/login.component';
 import { FilterSortComponent } from './components/filter-sort/filter-sort.component';
 import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
@@ -28,7 +27,6 @@ import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.com
     HeaderComponent,
     FilterSortComponent,
     SearchInputComponent,
-    FilterActivatorComponent,
     LoginComponent,
     NotFoundPageComponent,
   ],

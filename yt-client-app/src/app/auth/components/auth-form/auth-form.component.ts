@@ -1,22 +1,15 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import {
   AbstractControl,
   FormControl,
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { Router } from '@angular/router';
 import {
+  ERROR_MESSAGES,
   LoginForm,
   LoginFromKeys,
-  Paths,
 } from 'src/app/shared/constants/shared-constants';
-
-// Error Messages
-import errors from '../../../../assets/error-message.json';
-
-// Service
-import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'yt-auth-form',
@@ -24,9 +17,11 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./auth-form.component.scss'],
 })
 export class AuthFormComponent {
+  @Output() formSubmit = new EventEmitter<string>();
+
   public isPassHidden = true;
 
-  private loginForm = new FormGroup({
+  public loginForm = new FormGroup({
     [LoginForm.login]: new FormControl('', [
       Validators.required,
       Validators.minLength(4),
@@ -37,16 +32,6 @@ export class AuthFormComponent {
     ]),
   });
 
-  constructor(private auth: AuthService, private router: Router) {
-    this.auth.authChange.subscribe((status) => {
-      if (status) this.router.navigate([Paths.home, Paths.main]);
-    });
-  }
-
-  get form(): FormGroup {
-    return this.loginForm;
-  }
-
   get login(): AbstractControl | null {
     return this.loginForm.get(LoginForm.login);
   }
@@ -55,24 +40,19 @@ export class AuthFormComponent {
     return this.loginForm.get(LoginForm.pass);
   }
 
-  getErrorMessage(field: LoginFromKeys) {
+  getErrorMessageText(field: LoginFromKeys) {
     if (this[field]?.hasError('required')) {
-      return errors[field].req;
+      return ERROR_MESSAGES[field].req;
     }
 
     if (this[field]?.hasError('minlength')) {
-      return errors[field].length;
+      return ERROR_MESSAGES[field].length;
     }
 
-    return errors[field].unknown;
+    return ERROR_MESSAGES[field].unknown;
   }
 
   logIn() {
-    this.auth.userLogin = this.loginForm.value.login;
-    this.auth.logIn();
-  }
-
-  get isInvalid() {
-    return this.loginForm.invalid;
+    this.formSubmit.emit(this.loginForm.value.login);
   }
 }
