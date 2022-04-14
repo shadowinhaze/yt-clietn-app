@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import {
   ActivatedRouteSnapshot,
   CanActivate,
@@ -7,20 +7,25 @@ import {
   Router,
   UrlTree,
 } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { Paths } from 'src/app/shared/constants/shared-constants';
 
 @Injectable({
   providedIn: 'root',
 })
-export class AuthGuard implements CanLoad, CanActivate {
+export class AuthGuard implements CanLoad, CanActivate, OnDestroy {
   private isAuthorized: boolean = false;
+
+  private subscription: Subscription = new Subscription();
 
   constructor(private router: Router, private auth: AuthService) {
     this.isAuthorized = auth.isAuthorized;
-    this.auth.userChange.subscribe(() => {
-      this.isAuthorized = auth.isAuthorized;
-    });
+    this.subscription.add(
+      this.auth.userChange.subscribe(() => {
+        this.isAuthorized = auth.isAuthorized;
+      })
+    );
   }
 
   canActivate(route: ActivatedRouteSnapshot): boolean | UrlTree {
@@ -42,5 +47,9 @@ export class AuthGuard implements CanLoad, CanActivate {
       default:
         return throwToAuth;
     }
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 }

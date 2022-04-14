@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { Subject } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 import {
   FAKE_AUTH_TOKEN,
   LocalStorageKeys,
@@ -10,10 +10,12 @@ import {
 @Injectable({
   providedIn: 'root',
 })
-export class AuthService {
+export class AuthService implements OnDestroy {
   private user: string | null = null;
 
   public userChange: Subject<string | null> = new Subject<string | null>();
+
+  private subscription: Subscription = new Subscription();
 
   constructor(private router: Router) {
     this.init();
@@ -34,10 +36,12 @@ export class AuthService {
       this.userChange.next(name);
     }
 
-    this.userChange.subscribe((name) => {
-      this.user = name;
-      if (!name) this.router.navigate([Paths.home, Paths.auth]);
-    });
+    this.subscription.add(
+      this.userChange.subscribe((name) => {
+        this.user = name;
+        if (!name) this.router.navigate([Paths.home, Paths.auth]);
+      })
+    );
   }
 
   logIn(userName: string) {
@@ -50,5 +54,9 @@ export class AuthService {
     this.userChange.next(null);
     localStorage.removeItem(LocalStorageKeys.token);
     localStorage.removeItem(LocalStorageKeys.name);
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 }

@@ -1,9 +1,9 @@
-import { Subject } from 'rxjs';
-import { Injectable } from '@angular/core';
+import { Subject, Subscription } from 'rxjs';
+import { Injectable, OnDestroy } from '@angular/core';
 import { SortDirectionItems } from '../../shared/constants/shared-constants';
 
 @Injectable({ providedIn: 'root' })
-export class SettingsService {
+export class SettingsService implements OnDestroy {
   private settings: Settings = {
     sortType: '',
     sortDirection: '',
@@ -17,10 +17,14 @@ export class SettingsService {
 
   private isResultsListShown: boolean = false;
 
+  private subscription: Subscription = new Subscription();
+
   constructor() {
-    this.resultsListShowChange.subscribe((status) => {
-      this.isResultsListShown = status;
-    });
+    this.subscription.add(
+      this.resultsListShowChange.subscribe((status) => {
+        this.isResultsListShown = status;
+      })
+    );
   }
 
   get sortType() {
@@ -79,5 +83,9 @@ export class SettingsService {
 
   update(): void {
     this.settingsChange.next({ ...this.settings });
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 }
