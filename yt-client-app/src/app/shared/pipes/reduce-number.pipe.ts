@@ -6,7 +6,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class ReduceNumberPipe implements PipeTransform {
   transform(value: string): string {
-    // Check if number is upsent
+    // Check if number is unsent
     if (!value) return '0';
 
     // Check if number is as mln
