@@ -5,21 +5,11 @@
       matInput
       class="search-form__input"
       type="search"
-      placeholder="What
-    are you want to find out?"
+      placeholder="What are you want to find out?"
       autocomplete="off"
-      [value]="searchValue"
-      (change)="onSearchValueChange($event)"
+      [ngModel]="searchValue"
+      (ngModelChange)="changeSearchValue($event)"
       name="search"
     />
   </mat-form-field>
-  <button
-    mat-raised-button
-    class="search-form__submit"
-    color="primary"
-    type="submit"
-    (click)="onSearchValueSubmit()"
-  >
-    Search
-  </button>
 </form>
