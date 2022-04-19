@@ -1,31 +1,16 @@
-import { Subject, Subscription } from 'rxjs';
-import { Injectable, OnDestroy } from '@angular/core';
+import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 import { SortDirectionItems } from '../../shared/constants/shared-constants';
 
 @Injectable({ providedIn: 'root' })
-export class SettingsService implements OnDestroy {
+export class SettingsService {
   private settings: Settings = {
     sortType: '',
     sortDirection: '',
     filterValue: '',
-    searchValue: '',
   };
 
-  public resultsListShowChange: Subject<boolean> = new Subject<boolean>();
-
-  public settingsChange: Subject<Settings> = new Subject<Settings>();
-
-  private isResultsListShown: boolean = false;
-
-  private subscription: Subscription = new Subscription();
-
-  constructor() {
-    this.subscription.add(
-      this.resultsListShowChange.subscribe((status) => {
-        this.isResultsListShown = status;
-      })
-    );
-  }
+  public settings$ = new Subject<Settings>();
 
   get sortType() {
     return this.settings.sortType;
@@ -54,14 +39,6 @@ export class SettingsService implements OnDestroy {
 
   set filterValue(value: string) {
     this.settings.filterValue = value;
-  }
-
-  get searchValue() {
-    return this.settings.searchValue;
-  }
-
-  set searchValue(value: string) {
-    this.settings.searchValue = value;
     this.update();
   }
 
@@ -69,23 +46,7 @@ export class SettingsService implements OnDestroy {
     return this.settings.sortDirection === SortDirectionItems.asc;
   }
 
-  get isSearchListShown() {
-    return this.isResultsListShown;
-  }
-
-  set isSearchListShown(value: boolean) {
-    if (value && this.settings.searchValue !== '') {
-      this.resultsListShowChange.next(true);
-    } else {
-      this.resultsListShowChange.next(false);
-    }
-  }
-
-  update(): void {
-    this.settingsChange.next({ ...this.settings });
-  }
-
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+  private update() {
+    this.settings$.next({ ...this.settings });
   }
 }
