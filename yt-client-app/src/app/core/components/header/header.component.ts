@@ -1,26 +1,58 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  Router,
+  NavigationEnd,
+  Event as NavigationEvent,
+} from '@angular/router';
+import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/auth/services/auth.service';
-import { SettingsService } from 'src/app/core/services/settings.service';
 import { APP_TITLE, Paths } from 'src/app/shared/constants/shared-constants';
+import { SearchService } from '../../services/search.service';
 
 @Component({
   selector: 'yt-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit, OnDestroy {
   readonly mainTitle = APP_TITLE;
 
   public isSettingsPanelShown: boolean = false;
 
-  public searchValue = '';
+  public isSettingsTogglerActivated: boolean = false;
+
+  public isOnSearchPage: boolean = false;
+
+  private subscription = new Subscription();
 
   constructor(
-    public settingsService: SettingsService,
     public auth: AuthService,
+    private searchService: SearchService,
     private router: Router
-  ) {}
+  ) {
+    this.subscription.add(
+      this.router.events.subscribe((event: NavigationEvent) => {
+        if (event instanceof NavigationEnd) {
+          const path = event.urlAfterRedirects;
+          this.isOnSearchPage =
+            path.includes(Paths.main) && !path.includes(Paths.vid);
+        }
+      })
+    );
+  }
+
+  get currentSearchValue() {
+    return this.searchService.searchValue.getValue();
+  }
+
+  ngOnInit(): void {
+    this.subscription.add(
+      this.searchService.searchValue.subscribe((value) => {
+        this.isSettingsTogglerActivated = Boolean(value);
+        this.isSettingsPanelShown = Boolean(value);
+      })
+    );
+  }
 
   toggleSettings() {
     this.isSettingsPanelShown = !this.isSettingsPanelShown;
@@ -30,19 +62,16 @@ export class HeaderComponent {
     if (this.auth.isAuthorized) this.router.navigate([Paths.home]);
   }
 
-  private setSettings({ type, value }: { type: boolean; value: string }) {
-    this.settingsService.searchValue = value;
-    this.searchValue = value;
-    this.isSettingsPanelShown = type;
-    this.settingsService.isSearchListShown = type;
-  }
-
   onSearchValueSubmit(value: string) {
-    this.setSettings({ type: true, value });
+    this.searchService.newSearchValue = value;
   }
 
   logOut() {
     this.auth.logOut();
-    this.setSettings({ type: false, value: '' });
+    this.searchService.newSearchValue = '';
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 }

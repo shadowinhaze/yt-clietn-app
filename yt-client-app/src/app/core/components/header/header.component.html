@@ -13,18 +13,18 @@
           />
         </div>
         <yt-search-input
-          *ngIf="this.auth.isAuthorized"
+          *ngIf="this.auth.isAuthorized && isOnSearchPage"
           style="flex-grow: 2"
-          [searchValue]="searchValue"
+          [searchValue]="currentSearchValue"
           (searchValueSubmit)="onSearchValueSubmit($event)"
         ></yt-search-input>
         <button
           mat-mini-fab
           color="primary"
-          aria-label="Application sorting and filtering parametres"
+          aria-label="Application sorting and filtering parameters"
           (click)="toggleSettings()"
-          *ngIf="this.auth.isAuthorized"
-          [disabled]="!settingsService.isSearchListShown"
+          *ngIf="this.auth.isAuthorized && isOnSearchPage"
+          [disabled]="!isSettingsTogglerActivated"
         >
           <mat-icon>sort</mat-icon>
         </button>
@@ -35,7 +35,10 @@
         (logOut)="logOut()"
       ></yt-login>
     </mat-toolbar-row>
-    <mat-toolbar-row *ngIf="isSettingsPanelShown" class="header__container">
+    <mat-toolbar-row
+      *ngIf="isSettingsPanelShown && isOnSearchPage"
+      class="header__container"
+    >
       <yt-filter-sort style="width: 100%"></yt-filter-sort>
     </mat-toolbar-row>
   </mat-toolbar>
