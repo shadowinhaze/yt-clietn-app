@@ -1,29 +1,19 @@
 <div class="header-filter">
   <div class="header-filter__block">
     <h3 class="header-filter__label">Sorting by:</h3>
-    <button mat-stroked-button (click)="setSortType(this.sortTypes.date)">
-      date
-      <!-- TODO reduce html component representation -->
-      <ng-template
-        ytDirectionIcon
-        [isDirShown]="getIconCondition(this.sortTypes.date)"
-        [isDirAsc]="settingsService.isAscending"
-        [thumbDown]="thumbDown"
-      >
-        <mat-icon>trending_up</mat-icon>
-      </ng-template>
-    </button>
-    <button mat-stroked-button (click)="setSortType(this.sortTypes.views)">
-      count of views
-      <ng-template
-        ytDirectionIcon
-        [isDirShown]="getIconCondition(this.sortTypes.views)"
-        [isDirAsc]="settingsService.isAscending"
-        [thumbDown]="thumbDown"
-      >
-        <mat-icon>trending_up</mat-icon>
-      </ng-template>
-    </button>
+    <ng-container *ngFor="let sortAction of SortActions">
+      <button mat-stroked-button (click)="sortAction.action()">
+        {{ sortAction.name }}
+        <ng-template
+          ytDirectionIcon
+          [isDirShown]="sortAction.status()"
+          [isDirAsc]="settingsService.isAscending"
+          [thumbDown]="thumbDown"
+        >
+          <mat-icon>trending_up</mat-icon>
+        </ng-template>
+      </button>
+    </ng-container>
   </div>
   <div class="header-filter__block">
     <h3 class="header-filter__label">By word or sentence:</h3>
