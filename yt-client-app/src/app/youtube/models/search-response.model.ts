@@ -5,6 +5,8 @@ export interface RootObject {
   etag: string;
   pageInfo: PageInfo;
   items: SearchItem[];
+  nextPageToken: string;
+  regionCode: string;
 }
 
 export interface PageInfo {

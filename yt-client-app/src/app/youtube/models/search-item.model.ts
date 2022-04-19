@@ -1,9 +1,25 @@
+export interface SearchItemShort {
+  id: string;
+  publishedAt: Date;
+  title: string;
+  channelTitle: string;
+  description: string;
+  thumbnails: Thumbnails;
+  tags: string[];
+  statistics: Statistics;
+}
+
 export interface SearchItem {
   kind: string;
   etag: string;
-  id: string;
   snippet: Snippet;
   statistics: Statistics;
+  id: string | ItemId;
+}
+
+export interface ItemId {
+  kind: string;
+  videoId: string;
 }
 
 export interface Snippet {
@@ -29,7 +45,6 @@ export interface Localized {
 export interface Statistics {
   viewCount: string;
   likeCount: string;
-  dislikeCount: string;
   favoriteCount: string;
   commentCount: string;
 }
