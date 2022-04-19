@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { map, Observable } from 'rxjs';
-import { SearchItem } from '../../models/search-item.model';
+import { SearchItemShort } from '../../models/search-item.model';
 
 @Component({
   selector: 'yt-search-results-item-page',
@@ -10,7 +10,7 @@ import { SearchItem } from '../../models/search-item.model';
 export class SearchResultsItemPageComponent implements OnInit {
   constructor(private activatedRoute: ActivatedRoute) {}
 
-  public card: Observable<SearchItem> | null = null;
+  public card: Observable<SearchItemShort> | null = null;
 
   ngOnInit(): void {
     this.card = this.activatedRoute.data.pipe(
