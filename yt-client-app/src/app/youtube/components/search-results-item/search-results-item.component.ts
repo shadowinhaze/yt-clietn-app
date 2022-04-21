@@ -11,6 +11,6 @@ export class SearchResultsItemComponent {
   @Input() card!: SearchItemShort;
 
   get id() {
-    return `${Paths.vid}/${this.card.id}`;
+    return `${Paths.video}/${this.card.id}`;
   }
 }

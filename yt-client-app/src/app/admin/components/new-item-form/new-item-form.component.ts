@@ -1,10 +1,5 @@
 import { Component } from '@angular/core';
-import {
-  AbstractControl,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import {
   ERROR_MESSAGES,
   NewItemForm,
@@ -35,32 +30,31 @@ export class NewItemFormComponent {
     ]),
     [NewItemForm.img]: new FormControl('', [
       Validators.required,
-      Validators.pattern(FORMS_PATTERNS.url),
+      Validators.pattern(FORMS_PATTERNS.img),
     ]),
-    [NewItemForm.vid]: new FormControl('', [
+    [NewItemForm.video]: new FormControl('', [
       Validators.required,
-      Validators.pattern(FORMS_PATTERNS.url),
+      Validators.pattern(FORMS_PATTERNS.video),
     ]),
   });
 
-  getFormPart(part: NewItemFormKeys): AbstractControl | null {
-    return this.newItemForm.get(part);
-  }
-
   getErrorMessageText(field: NewItemFormKeys) {
-    if (this.getFormPart(field)?.hasError(FormsErrorsKeys.req)) {
+    const hasError = (key: FormsErrorsKeys) =>
+      this.newItemForm.get(field)?.hasError(key);
+
+    if (hasError(FormsErrorsKeys.req)) {
       return ERROR_MESSAGES[field].req;
     }
 
-    if (this.getFormPart(field)?.hasError(FormsErrorsKeys.minLen)) {
+    if (hasError(FormsErrorsKeys.minLen)) {
       return ERROR_MESSAGES[field].minlength;
     }
 
-    if (this.getFormPart(field)?.hasError(FormsErrorsKeys.maxLen)) {
+    if (hasError(FormsErrorsKeys.maxLen)) {
       return ERROR_MESSAGES[field].maxlength;
     }
 
-    if (this.getFormPart(field)?.hasError(FormsErrorsKeys.pattern)) {
+    if (hasError(FormsErrorsKeys.pattern)) {
       return ERROR_MESSAGES[field].pattern;
     }
 

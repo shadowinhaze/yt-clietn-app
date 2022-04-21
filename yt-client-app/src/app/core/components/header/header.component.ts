@@ -35,7 +35,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
         if (event instanceof NavigationEnd) {
           const path = event.urlAfterRedirects;
           this.isOnSearchPage =
-            path.includes(Paths.main) && !path.includes(Paths.vid);
+            path.includes(Paths.main) && !path.includes(Paths.video);
         }
       })
     );

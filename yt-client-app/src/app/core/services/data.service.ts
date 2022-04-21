@@ -27,11 +27,11 @@ export class DataService implements OnDestroy {
   ) {
     this.subscription.add(
       this.searchService.debounce().subscribe((value) => {
-        if (!value) {
+        if (value) {
+          this.fetchData(value);
+        } else {
           this.rawData = [];
           this.data$.next([]);
-        } else {
-          this.fetchData(value);
         }
       })
     );
@@ -56,32 +56,31 @@ export class DataService implements OnDestroy {
 
   sortData(type: SortType, direction: SortDirection): void {
     if (!type) return;
-    const sorted =
+
+    const sorted = [...this.data$.getValue()].sort((a, b) =>
       type === SortTypeItems.date
-        ? [...this.data$.getValue()].sort(
-            (a, b) => DateParse(a.publishedAt) - DateParse(b.publishedAt)
-          )
-        : [...this.data$.getValue()].sort(
-            (a, b) =>
-              Number(a.statistics.viewCount) - Number(b.statistics.viewCount)
-          );
+        ? DateParse(a.publishedAt) - DateParse(b.publishedAt)
+        : Number(a.statistics.viewCount) - Number(b.statistics.viewCount)
+    );
+
     this.data$.next(
       direction === SortDirectionItems.asc ? sorted : sorted.reverse()
     );
   }
 
   filterData(value: string): void {
-    this.data$.next(
-      this.rawData.filter((item) => {
-        const searchable = value.trim().toLowerCase();
-        const { channelTitle, title, tags = [] } = item;
-        return (
-          channelTitle.toLowerCase().includes(searchable) ||
-          title.toLowerCase().includes(searchable) ||
-          tags.includes(searchable)
-        );
-      })
-    );
+    const filteredItems = this.rawData.filter((item) => {
+      const searchable = value.trim().toLowerCase();
+      const { channelTitle, title, tags = [] } = item;
+
+      return (
+        channelTitle.toLowerCase().includes(searchable) ||
+        title.toLowerCase().includes(searchable) ||
+        tags.includes(searchable)
+      );
+    });
+
+    this.data$.next(filteredItems);
   }
 
   getItemById(id: string): SearchItemShort | Observable<SearchItemShort> {

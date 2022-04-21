@@ -7,7 +7,7 @@ export enum NewItemForm {
   title = 'title',
   descr = 'description',
   img = 'image',
-  vid = 'video',
+  video = 'video',
 }
 
 export enum FormsErrorsKeys {
@@ -46,7 +46,8 @@ export const NewItemFormFields: NewItemFormCollection = [
 ];
 
 export const FORMS_PATTERNS = {
-  url: /[(http(s)?)://(www.)?a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)/gi,
+  video: /^(https?:\/\/)?(www\.youtube\.com|youtu\.be)\/.+$/,
+  img: /(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png)/,
   digit: /(?=.*\d)/,
   lowerCase: /(?=.*[a-z])/,
   upperCase: /(?=.*[A-Z])/,

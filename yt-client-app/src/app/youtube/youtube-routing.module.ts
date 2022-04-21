@@ -11,7 +11,7 @@ const routes: Routes = [
     component: SearchResultsPageComponent,
   },
   {
-    path: `${Paths.vid}/:id`,
+    path: `${Paths.video}/:id`,
     component: SearchResultsItemPageComponent,
     resolve: {
       resultsItem: ResultsItemMoreResolver,

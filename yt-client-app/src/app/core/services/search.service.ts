@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, debounceTime, distinctUntilChanged } from 'rxjs';
-import { SEARCH_VALUE_MIN_LEN } from 'src/app/shared/constants/shared-constants';
+import {
+  SEARCH_VALUE_MIN_LEN,
+  TimesConstants,
+} from 'src/app/shared/constants/shared-constants';
 
 import { ApiService } from './api.service';
 
@@ -17,7 +20,10 @@ export class SearchService {
   }
 
   debounce() {
-    return this.searchValue.pipe(debounceTime(1000), distinctUntilChanged());
+    return this.searchValue.pipe(
+      debounceTime(TimesConstants.msInSec),
+      distinctUntilChanged()
+    );
   }
 
   search(searchValue: string) {

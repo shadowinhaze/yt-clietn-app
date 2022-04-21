@@ -16,6 +16,11 @@ export enum TimesConstants {
   hourInDay = 24,
 }
 
+export enum BigNumbers {
+  mln = 1000000,
+  K = 1000,
+}
+
 export enum ResultsListBreakPoints {
   desktop = 1100,
   tablet = 820,
@@ -37,7 +42,7 @@ export enum Paths {
   notFound = '404',
   admin = 'admin',
   newItem = 'creation-lab',
-  vid = 'video',
+  video = 'video',
 }
 
 export const FAKE_AUTH_TOKEN =
