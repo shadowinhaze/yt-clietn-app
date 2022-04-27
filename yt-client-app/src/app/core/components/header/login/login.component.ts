@@ -16,6 +16,8 @@ export class LoginComponent {
 
   @Output() readonly logOut = new EventEmitter();
 
+  pathToAdmin = `/${Paths.admin}`;
+
   onLogOut() {
     this.logOut.emit();
   }

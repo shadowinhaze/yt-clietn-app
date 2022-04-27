@@ -10,6 +10,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 // Modules
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
 // ================
@@ -32,6 +33,7 @@ import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.com
   ],
   exports: [HeaderComponent],
   imports: [
+    RouterModule,
     CommonModule,
     SharedModule,
     MatToolbarModule,
