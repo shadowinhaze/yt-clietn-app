@@ -20,6 +20,8 @@ import { SearchResultsItemMoreComponent } from './components/search-results-item
 import { SearchResultsPageComponent } from './pages/search-results-page/search-results-page.component';
 import { SearchResultsItemPageComponent } from './pages/search-results-item-page/search-results-item-page.component';
 import { ResultsCardDescriptorComponent } from './components/results-card-descriptor/results-card-descriptor.component';
+import { CustomItemComponent } from './components/custom-item/custom-item.component';
+import { CustomItemMoreComponent } from './components/custom-item-more/custom-item-more.component';
 // ================
 
 @NgModule({
@@ -30,6 +32,8 @@ import { ResultsCardDescriptorComponent } from './components/results-card-descri
     SearchResultsPageComponent,
     SearchResultsItemPageComponent,
     ResultsCardDescriptorComponent,
+    CustomItemComponent,
+    CustomItemMoreComponent,
   ],
   exports: [
     SearchResultsListComponent,

@@ -3,6 +3,7 @@ import {
   ResultsListBreakPoints,
   ResultsListColumns,
 } from 'src/app/shared/constants/shared-constants';
+import { CustomItem } from '../../models/custom-item.model';
 import { SearchItemShort } from '../../models/search-item.model';
 
 @Component({
@@ -11,7 +12,9 @@ import { SearchItemShort } from '../../models/search-item.model';
   styleUrls: ['./search-results-list.component.scss'],
 })
 export class SearchResultsListComponent implements OnInit {
-  @Input() public data: SearchItemShort[] = [];
+  @Input() public customData: CustomItem[] | null = null;
+
+  @Input() public apiData: SearchItemShort[] | null = null;
 
   public colsAmount: number | undefined;
 
