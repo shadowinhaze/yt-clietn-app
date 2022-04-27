@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import {
   ERROR_MESSAGES,
@@ -8,6 +8,8 @@ import {
   FormsErrorsKeys,
   NewItemFormLimits,
 } from 'src/app/shared/constants/shared-forms-constants';
+import { CustomItem } from 'src/app/youtube/models/custom-item.model';
+import { v4 } from 'uuid';
 
 @Component({
   selector: 'yt-new-item-form',
@@ -15,6 +17,8 @@ import {
   styleUrls: ['./new-item-form.component.scss'],
 })
 export class NewItemFormComponent {
+  @Output() formSubmit = new EventEmitter<CustomItem>();
+
   readonly Fields: NewItemFormCollection = NewItemFormFields;
 
   readonly minDate = new Date();
@@ -36,6 +40,7 @@ export class NewItemFormComponent {
       Validators.required,
       Validators.pattern(FORMS_PATTERNS.video),
     ]),
+    [NewItemForm.date]: new FormControl(new Date()),
   });
 
   getErrorMessageText(field: NewItemFormKeys) {
@@ -59,5 +64,18 @@ export class NewItemFormComponent {
     }
 
     return 'unknown error';
+  }
+
+  newItemFormSubmit() {
+    const newCard = {
+      id: v4(),
+      title: this.newItemForm.value[NewItemForm.title],
+      description: this.newItemForm.value[NewItemForm.descr],
+      imageLink: this.newItemForm.value[NewItemForm.img],
+      videoLink: this.newItemForm.value[NewItemForm.video],
+      creationDate: this.newItemForm.value[NewItemForm.date],
+    };
+
+    this.formSubmit.emit(newCard);
   }
 }
