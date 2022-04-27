@@ -5,7 +5,7 @@
       <button mat-stroked-button (click)="sortAction.action()">
         {{ sortAction.name }}
         <mat-icon *ngIf="sortAction.status()">{{
-          settingsService.isAscending ? 'trending_up' : 'trending_down'
+          isAscending ? 'trending_up' : 'trending_down'
         }}</mat-icon>
       </button>
     </ng-container>
@@ -14,7 +14,7 @@
     <h3 class="header-filter__label">By word or sentence:</h3>
     <input
       type="text"
-      [(ngModel)]="settingsService.filterValue"
+      [ngModel]="filterValue"
       (ngModelChange)="setFilter($event)"
     />
   </div>

@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { SettingsService } from 'src/app/core/services/settings.service';
-import { SortTypeItems } from 'src/app/shared/constants/shared-constants';
+import {
+  SortDirectionItems,
+  SortTypeItems,
+} from 'src/app/shared/constants/shared-constants';
 
 @Component({
   selector: 'yt-filter-sort',
@@ -21,18 +24,27 @@ export class FilterSortComponent {
     },
   ];
 
-  constructor(public settingsService: SettingsService) {}
+  constructor(private settingsService: SettingsService) {}
+
+  public get filterValue() {
+    return this.settingsService.getItem('filterValue');
+  }
+
+  public get isAscending() {
+    return (
+      this.settingsService.getItem('sortDirection') === SortDirectionItems.asc
+    );
+  }
 
   setSortType(type: SortType) {
-    this.settingsService.sortType = type;
+    this.settingsService.setSort(type);
   }
 
   setFilter(value: string) {
-    this.settingsService.sortType = '';
-    this.settingsService.filterValue = value;
+    this.settingsService.setFilter(value);
   }
 
   getIconCondition(type: SortType) {
-    return this.settingsService.sortType === type;
+    return this.settingsService.getItem('sortType') === type;
   }
 }
