@@ -1,9 +1,9 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { Resolve, ActivatedRouteSnapshot, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { Observable, Subscription, tap } from 'rxjs';
+import { Observable, Subscription, take } from 'rxjs';
 import { ApiService } from 'src/app/core/services/api.service';
-import { AppStore } from 'src/app/store/store.model';
+import { AppStore } from 'src/app/store/models/store.model';
 import { CustomItem } from '../models/custom-item.model';
 import { SearchItemShort } from '../models/search-item.model';
 
@@ -15,8 +15,8 @@ export class ResultsItemMoreResolver
     Resolve<
       | CustomItem
       | SearchItemShort
-      | Observable<SearchItemShort>
       | Promise<boolean>
+      | Observable<SearchItemShort>
     >,
     OnDestroy
 {
@@ -52,26 +52,28 @@ export class ResultsItemMoreResolver
     | Observable<SearchItemShort>
     | Promise<boolean> {
     const { id } = route.params;
-    const apiItem = this.getApiItemById(id);
-    const customItem = this.getCustomItemById(id);
 
-    return customItem || apiItem || this.router.navigate(['**']);
+    return (
+      this.getCustomItemById(id) ||
+      this.getApiItemById(id) ||
+      this.goToNotFoundPage()
+    );
   }
 
-  getApiItemById(
+  private getApiItemById(
     id: string
-  ): SearchItemShort | Observable<SearchItemShort> | undefined {
+  ): SearchItemShort | Observable<SearchItemShort> {
     return this.rawApiItems.length > 0
       ? this.rawApiItems.find((item) => item.id === id)!
-      : this.apiService.getItemById(id).pipe(
-          tap((data) => {
-            if (!data) this.router.navigate(['**']);
-          })
-        );
+      : this.apiService.getItemById(id).pipe(take(1));
   }
 
-  getCustomItemById(id: string): CustomItem | undefined {
+  private getCustomItemById(id: string): CustomItem | undefined {
     return this.customItems.find((item) => item.id === id);
+  }
+
+  private goToNotFoundPage(): Promise<boolean> {
+    return this.router.navigate(['**']);
   }
 
   ngOnDestroy(): void {
