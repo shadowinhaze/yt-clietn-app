@@ -8,12 +8,12 @@ const addApiItems = createAction(
 );
 
 const sortApiItems = createAction(
-  ActionCommands.settingsSort,
+  ActionCommands.apiItemsSort,
   props<{ sortType: SortType; sortDirection: SortDirection }>()
 );
 
 const filterApiItems = createAction(
-  ActionCommands.settingsFilter,
+  ActionCommands.apiItemsFilter,
   props<{ filterValue: string }>()
 );
 

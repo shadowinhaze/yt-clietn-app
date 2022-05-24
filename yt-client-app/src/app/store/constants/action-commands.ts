@@ -1,7 +1,7 @@
 export enum ActionCommands {
-  apiFetch = '[API] fetch yt-items',
+  apiFetch = '[API ITEM] fetch yt-api-items',
   searchSubmit = '[SEARCH] new search value for API',
-  settingsSort = '[SETTINGS] sort yt-api-items',
-  settingsFilter = '[SETTINGS] filter yt-api-items',
-  adminNewItem = '[ADMIN - Creation lab] add custom item',
+  apiItemsSort = '[API ITEM] sort yt-api-items',
+  apiItemsFilter = '[API ITEM] filter yt-api-items',
+  addCustomItem = '[CUSTOM ITEM] add new custom item',
 }

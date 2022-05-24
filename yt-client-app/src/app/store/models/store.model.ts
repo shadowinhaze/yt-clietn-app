@@ -1,5 +1,5 @@
-import { CustomItem } from '../youtube/models/custom-item.model';
-import { SearchItemShort } from '../youtube/models/search-item.model';
+import { CustomItem } from '../../youtube/models/custom-item.model';
+import { SearchItemShort } from '../../youtube/models/search-item.model';
 
 export interface ApiItems {
   raw: SearchItemShort[];

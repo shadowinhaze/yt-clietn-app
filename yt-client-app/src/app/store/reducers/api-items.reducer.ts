@@ -5,7 +5,7 @@ import {
   filterApiItems,
   sortApiItems,
 } from '../actions/api-item.action';
-import { initialState } from '../store.model';
+import { initialState } from '../models/store.model';
 
 export const apiItemsReducer = createReducer(
   initialState.apiItems,
