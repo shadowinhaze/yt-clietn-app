@@ -1,12 +1,3 @@
-// Angular Material
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatInputModule } from '@angular/material/input';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
-import { MatChipsModule } from '@angular/material/chips';
-import { MatTooltipModule } from '@angular/material/tooltip';
-// ================
-
 // Modules
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -32,19 +23,6 @@ import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.com
     NotFoundPageComponent,
   ],
   exports: [HeaderComponent],
-  imports: [
-    RouterModule,
-    CommonModule,
-    SharedModule,
-    MatToolbarModule,
-    MatIconModule,
-    MatToolbarModule,
-    MatInputModule,
-    MatButtonModule,
-    MatIconModule,
-    MatChipsModule,
-    MatTooltipModule,
-    FormsModule,
-  ],
+  imports: [RouterModule, CommonModule, SharedModule, FormsModule],
 })
 export class CoreModule {}

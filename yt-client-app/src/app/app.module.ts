@@ -12,9 +12,8 @@ import { CoreModule } from './core/core.module';
 
 import { AppComponent } from './app.component';
 import { interceptorProviders } from './core/interceptors/interceptors';
-import { reducers } from './store/reducers';
+import { effects, metaReducers, reducers } from './store';
 import { environment } from '../environments/environment';
-import { ApiItemsEffect } from './store/effects/api-items.effects';
 
 @NgModule({
   declarations: [AppComponent],
@@ -24,8 +23,8 @@ import { ApiItemsEffect } from './store/effects/api-items.effects';
     AppRoutingModule,
     BrowserAnimationsModule,
     CoreModule,
-    StoreModule.forRoot(reducers),
-    EffectsModule.forRoot([ApiItemsEffect]),
+    StoreModule.forRoot(reducers, metaReducers),
+    EffectsModule.forRoot(effects),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: environment.production,
