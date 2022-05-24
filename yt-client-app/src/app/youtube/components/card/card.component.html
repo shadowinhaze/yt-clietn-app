@@ -1,0 +1,29 @@
+<mat-card class="results-card" *ngIf="card">
+  <img
+    mat-card-image
+    class="results-card__thumbnail"
+    [src]="imageLink"
+    alt="{{ card.title }}"
+  />
+  <mat-card-content class="results-card__content" *ngIf="card">
+    <yt-results-card-descriptor [card]="apiCard"></yt-results-card-descriptor>
+  </mat-card-content>
+  <mat-card-title class="results-card__title">{{ card.title }}</mat-card-title>
+  <mat-card-actions class="results-card__actions">
+    <a
+      [routerLink]="id"
+      mat-raised-button
+      color="primary"
+      class="results-card__action"
+    >
+      More...
+    </a>
+  </mat-card-actions>
+  <mat-card-footer class="results-card__footer">
+    <div
+      class="results-card__indicator"
+      ytCardBorderColor
+      publishedDate="{{ cardDate }}"
+    ></div>
+  </mat-card-footer>
+</mat-card>

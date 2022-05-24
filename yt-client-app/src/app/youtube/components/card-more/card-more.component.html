@@ -1,0 +1,31 @@
+<mat-card class="card-full" *ngIf="card">
+  <button
+    mat-mini-fab
+    color="primary"
+    aria-label="Go back to the card list"
+    [routerLink]="backLink"
+    class="card-full__back"
+  >
+    <mat-icon>arrow_back_ios_new</mat-icon>
+  </button>
+  <img class="card-full__thumbnail" [src]="imageLink" alt="{{ card.title }}" />
+  <mat-card-title class="card-full__title"
+    ><h2>{{ card.title }}</h2></mat-card-title
+  >
+  <mat-card-subtitle class="card-full__date"
+    ><time>{{ cardDate | date: 'fullDate' }}</time></mat-card-subtitle
+  >
+  <mat-card-content class="card-full__content">
+    <h3>Description:</h3>
+    <p>{{ card.description }}</p>
+    <a [href]="videoLink" target="_blank">Watch more on YouTube</a>
+  </mat-card-content>
+  <mat-card-footer class="card-full__footer">
+    <yt-results-card-descriptor [card]="apiCard"></yt-results-card-descriptor>
+    <div
+      class="card-full__indicator"
+      ytCardBorderColor
+      publishedDate="{{ cardDate }}"
+    ></div>
+  </mat-card-footer>
+</mat-card>
