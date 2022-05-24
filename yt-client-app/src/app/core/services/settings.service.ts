@@ -5,7 +5,7 @@ import {
   filterApiItems,
   sortApiItems,
 } from 'src/app/store/actions/api-item.action';
-import { AppStore } from 'src/app/store/store.model';
+import { AppStore } from 'src/app/store/models/store.model';
 import { SortDirectionItems } from '../../shared/constants/shared-constants';
 
 @Injectable({ providedIn: 'root' })

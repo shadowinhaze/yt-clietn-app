@@ -9,7 +9,7 @@ import {
 } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/auth/services/auth.service';
-import { Paths } from 'src/app/shared/constants/shared-constants';
+import { Path } from 'src/app/shared/constants/shared-constants';
 
 @Injectable({
   providedIn: 'root',
@@ -38,12 +38,12 @@ export class AuthGuard implements CanLoad, CanActivate, OnDestroy {
 
   handleRoute(path: string | undefined) {
     const throwToAuth =
-      this.isAuthorized || this.router.createUrlTree([Paths.home, Paths.auth]);
+      this.isAuthorized || this.router.createUrlTree([Path.home, Path.auth]);
     switch (path) {
-      case Paths.notFound:
+      case Path.notFound:
         return throwToAuth;
-      case Paths.auth:
-        return !this.isAuthorized || this.router.createUrlTree([Paths.home]);
+      case Path.auth:
+        return !this.isAuthorized || this.router.createUrlTree([Path.home]);
       default:
         return throwToAuth;
     }

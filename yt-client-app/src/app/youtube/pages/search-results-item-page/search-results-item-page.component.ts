@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { map, Observable } from 'rxjs';
+import { Subscription, tap } from 'rxjs';
 import { CustomItem } from '../../models/custom-item.model';
 import { SearchItemShort } from '../../models/search-item.model';
 
@@ -8,28 +8,24 @@ import { SearchItemShort } from '../../models/search-item.model';
   selector: 'yt-search-results-item-page',
   templateUrl: './search-results-item-page.component.html',
 })
-export class SearchResultsItemPageComponent implements OnInit {
+export class SearchResultsItemPageComponent implements OnInit, OnDestroy {
   constructor(private activatedRoute: ActivatedRoute) {}
 
-  private card: Observable<SearchItemShort | CustomItem> | null = null;
+  public card: SearchItemShort | CustomItem | null = null;
 
-  isCustom = false;
+  private routeSubscription: Subscription | null = null;
 
   ngOnInit(): void {
-    this.card = this.activatedRoute.data.pipe(
-      map((data) => data?.['resultsItem'])
-    );
-
-    this.card.subscribe((data) => {
-      this.isCustom = 'creationDate' in data;
-    });
+    this.routeSubscription = this.activatedRoute.data
+      .pipe(
+        tap((data) => {
+          this.card = data?.['resultsItem'];
+        })
+      )
+      .subscribe();
   }
 
-  get customCard(): Observable<CustomItem> | null {
-    return this.card as Observable<CustomItem> | null;
-  }
-
-  get apiCard(): Observable<SearchItemShort> | null {
-    return this.card as Observable<SearchItemShort> | null;
+  ngOnDestroy(): void {
+    this.routeSubscription?.unsubscribe();
   }
 }

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { map, Observable } from 'rxjs';
-import { AppStore } from 'src/app/store/store.model';
+import { AppStore } from 'src/app/store/models/store.model';
 import { CustomItem } from '../../models/custom-item.model';
 import { SearchItemShort } from '../../models/search-item.model';
 

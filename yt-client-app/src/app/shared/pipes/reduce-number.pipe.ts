@@ -17,6 +17,6 @@ export class ReduceNumberPipe implements PipeTransform {
       return `${(num / BigNumbers.mln).toFixed(1)} mln`;
 
     // Check if number is as ths
-    return num > 1000 ? `${(num / BigNumbers.K).toFixed(1)} k` : value;
+    return num > BigNumbers.K ? `${(num / BigNumbers.K).toFixed(1)} k` : value;
   }
 }

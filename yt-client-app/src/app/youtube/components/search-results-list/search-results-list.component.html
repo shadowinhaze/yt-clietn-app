@@ -7,7 +7,7 @@
   (window:resize)="handleColumns($event)"
 >
   <mat-grid-tile *ngFor="let ytCustomCard of customData">
-    <yt-custom-item [card]="ytCustomCard"></yt-custom-item>
+    <yt-card [card]="ytCustomCard"></yt-card>
   </mat-grid-tile>
 </mat-grid-list>
 
@@ -20,6 +20,6 @@
   (window:resize)="handleColumns($event)"
 >
   <mat-grid-tile *ngFor="let ytResponseCard of apiData">
-    <yt-search-results-item [card]="ytResponseCard"></yt-search-results-item>
+    <yt-card [card]="ytResponseCard"></yt-card>
   </mat-grid-tile>
 </mat-grid-list>

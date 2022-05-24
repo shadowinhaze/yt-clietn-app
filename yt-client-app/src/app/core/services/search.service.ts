@@ -11,6 +11,7 @@ import {
   TimesConstants,
 } from 'src/app/shared/constants/shared-constants';
 import { ActionCommands } from 'src/app/store/constants/action-commands';
+import { SearchValueAction } from 'src/app/store/models/actions.model';
 
 import { ApiService } from './api.service';
 
