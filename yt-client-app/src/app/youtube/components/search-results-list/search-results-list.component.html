@@ -1,25 +1,18 @@
 <mat-grid-list
-  *ngIf="customData && customData.length > 0"
   class="search-results-list"
   [cols]="colsAmount"
   gutterSize="1em"
   rowHeight="450px"
   (window:resize)="handleColumns($event)"
 >
-  <mat-grid-tile *ngFor="let ytCustomCard of customData">
-    <yt-card [card]="ytCustomCard"></yt-card>
-  </mat-grid-tile>
-</mat-grid-list>
-
-<mat-grid-list
-  *ngIf="apiData && apiData.length > 0"
-  class="search-results-list"
-  [cols]="colsAmount"
-  gutterSize="1em"
-  rowHeight="450px"
-  (window:resize)="handleColumns($event)"
->
-  <mat-grid-tile *ngFor="let ytResponseCard of apiData">
-    <yt-card [card]="ytResponseCard"></yt-card>
-  </mat-grid-tile>
+  <ng-container *ngIf="customData && customData.length > 0">
+    <mat-grid-tile *ngFor="let ytCustomCard of customData">
+      <yt-card [card]="ytCustomCard"></yt-card>
+    </mat-grid-tile>
+  </ng-container>
+  <ng-container *ngIf="apiData && apiData.length > 0">
+    <mat-grid-tile *ngFor="let ytResponseCard of apiData">
+      <yt-card [card]="ytResponseCard"></yt-card>
+    </mat-grid-tile>
+  </ng-container>
 </mat-grid-list>
