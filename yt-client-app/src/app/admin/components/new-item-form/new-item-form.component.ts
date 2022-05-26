@@ -8,6 +8,10 @@ import {
   FormsErrorsKeys,
   NewItemFormLimits,
 } from 'src/app/shared/constants/shared-forms-constants';
+import {
+  NewItemFormCollection,
+  NewItemFormKeys,
+} from 'src/app/shared/types/shared';
 import { CustomItem } from 'src/app/youtube/models/custom-item.model';
 import { v4 } from 'uuid';
 
@@ -77,5 +81,7 @@ export class NewItemFormComponent {
     };
 
     this.formSubmit.emit(newCard);
+
+    this.newItemForm.reset();
   }
 }

@@ -2,6 +2,11 @@ import { Injectable, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import {
+  AppSettings,
+  AppSettingsKey,
+  SortType,
+} from 'src/app/shared/types/shared';
+import {
   filterApiItems,
   sortApiItems,
 } from 'src/app/store/actions/api-item.action';
@@ -10,7 +15,7 @@ import { SortDirectionItems } from '../../shared/constants/shared-constants';
 
 @Injectable({ providedIn: 'root' })
 export class SettingsService implements OnDestroy {
-  public settings$ = new BehaviorSubject<Settings>({
+  public settings$ = new BehaviorSubject<AppSettings>({
     sortType: '',
     sortDirection: '',
     filterValue: '',
@@ -35,13 +40,13 @@ export class SettingsService implements OnDestroy {
     );
   }
 
-  public getItem(field: keyof Settings): string {
+  public getItem(field: AppSettingsKey): string {
     return this.settings$.getValue()[field];
   }
 
   public setSort(sortType: SortType): void {
     const sortDirection =
-      this.getItem('sortDirection') === SortDirectionItems.desc
+      this.getItem(AppSettingsKey.sortDir) === SortDirectionItems.desc
         ? SortDirectionItems.asc
         : SortDirectionItems.desc;
 

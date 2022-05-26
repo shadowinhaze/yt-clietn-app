@@ -4,6 +4,7 @@ import {
   SortDirectionItems,
   SortTypeItems,
 } from 'src/app/shared/constants/shared-constants';
+import { AppSettingsKey, SortType } from 'src/app/shared/types/shared';
 
 @Component({
   selector: 'yt-filter-sort',
@@ -27,12 +28,13 @@ export class FilterSortComponent {
   constructor(private settingsService: SettingsService) {}
 
   public get filterValue() {
-    return this.settingsService.getItem('filterValue');
+    return this.settingsService.getItem(AppSettingsKey.filterVal);
   }
 
   public get isAscending() {
     return (
-      this.settingsService.getItem('sortDirection') === SortDirectionItems.asc
+      this.settingsService.getItem(AppSettingsKey.sortDir) ===
+      SortDirectionItems.asc
     );
   }
 
@@ -45,6 +47,6 @@ export class FilterSortComponent {
   }
 
   getIconCondition(type: SortType) {
-    return this.settingsService.getItem('sortType') === type;
+    return this.settingsService.getItem(AppSettingsKey.sortType) === type;
   }
 }

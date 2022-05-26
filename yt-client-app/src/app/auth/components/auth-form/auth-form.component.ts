@@ -12,6 +12,7 @@ import {
   LoginForm,
   LoginFormLimits,
 } from 'src/app/shared/constants/shared-forms-constants';
+import { LoginFormKeys } from 'src/app/shared/types/shared';
 
 @Component({
   selector: 'yt-auth-form',

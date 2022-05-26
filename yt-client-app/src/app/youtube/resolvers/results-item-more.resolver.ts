@@ -3,6 +3,7 @@ import { Resolve, ActivatedRouteSnapshot, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable, Subscription, take } from 'rxjs';
 import { ApiService } from 'src/app/core/services/api.service';
+import { selectApiItems, selectCustomItems } from 'src/app/store';
 import { AppStore } from 'src/app/store/models/store.model';
 import { CustomItem } from '../models/custom-item.model';
 import { SearchItemShort } from '../models/search-item.model';
@@ -32,13 +33,13 @@ export class ResultsItemMoreResolver
     private apiService: ApiService
   ) {
     this.subscription.add(
-      this.store.select('apiItems').subscribe((apiItems) => {
+      this.store.select(selectApiItems).subscribe((apiItems) => {
         this.rawApiItems = [...apiItems.raw];
       })
     );
 
     this.subscription.add(
-      this.store.select('customItems').subscribe((customItems) => {
+      this.store.select(selectCustomItems).subscribe((customItems) => {
         this.customItems = [...customItems];
       })
     );

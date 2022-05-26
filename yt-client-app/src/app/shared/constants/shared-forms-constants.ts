@@ -1,3 +1,5 @@
+import { NewItemFormCollection, ErrorsBase } from '../types/shared';
+
 export enum LoginForm {
   login = 'login',
   pass = 'pass',
