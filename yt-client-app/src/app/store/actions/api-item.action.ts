@@ -1,4 +1,5 @@
 import { createAction, props } from '@ngrx/store';
+import { SortDirection, SortType } from 'src/app/shared/types/shared';
 import { SearchItemShort } from 'src/app/youtube/models/search-item.model';
 import { ActionCommands } from '../constants/action-commands';
 

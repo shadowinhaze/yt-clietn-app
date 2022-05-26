@@ -51,6 +51,7 @@ interface NewItemFormItem {
 
 export {
   SortType,
+  SortDirection,
   AppSettingsKey,
   AppSettings,
   AuthParams,

@@ -3,6 +3,7 @@ import {
   SortDirectionItems,
   SortTypeItems,
 } from '../constants/shared-constants';
+import { SortType, SortDirection } from '../types/shared';
 import { DateParse } from './date';
 
 export class DataProcessor {
