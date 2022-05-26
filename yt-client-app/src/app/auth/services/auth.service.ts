@@ -1,5 +1,6 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { Subject, Subscription } from 'rxjs';
 import { LocalStorageService } from 'src/app/core/services/local-storage.service';
 import {
@@ -7,6 +8,7 @@ import {
   LocalStorageKeys,
   Path,
 } from 'src/app/shared/constants/shared-constants';
+import { clearCustomItems } from 'src/app/store';
 
 @Injectable({
   providedIn: 'root',
@@ -18,7 +20,7 @@ export class AuthService implements OnDestroy {
 
   private subscription: Subscription = new Subscription();
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private store: Store) {
     this.init();
   }
 
@@ -60,6 +62,7 @@ export class AuthService implements OnDestroy {
     LocalStorageService.clearStoredItem(LocalStorageKeys.token);
     LocalStorageService.clearStoredItem(LocalStorageKeys.name);
     LocalStorageService.clearStoredItem(LocalStorageKeys.cards);
+    this.store.dispatch(clearCustomItems());
   }
 
   ngOnDestroy(): void {

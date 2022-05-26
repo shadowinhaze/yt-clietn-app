@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { map, Observable } from 'rxjs';
+import { selectApiItems, selectCustomItems } from 'src/app/store';
 import { AppStore } from 'src/app/store/models/store.model';
 import { CustomItem } from '../../models/custom-item.model';
 import { SearchItemShort } from '../../models/search-item.model';
@@ -11,10 +12,10 @@ import { SearchItemShort } from '../../models/search-item.model';
 })
 export class SearchResultsPageComponent {
   public customData$: Observable<CustomItem[]> =
-    this.store.select('customItems');
+    this.store.select(selectCustomItems);
 
   public apiData$: Observable<SearchItemShort[]> = this.store
-    .select('apiItems')
+    .select(selectApiItems)
     .pipe(map((data) => data.current));
 
   constructor(private store: Store<AppStore>) {}
