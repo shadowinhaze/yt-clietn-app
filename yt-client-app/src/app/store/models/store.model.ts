@@ -6,15 +6,37 @@ export interface ApiItems {
   current: SearchItemShort[];
 }
 
+export enum AppStoreKey {
+  customItems = 'customItems',
+  apiItems = 'apiItems',
+  uiMessage = 'uiMessage',
+}
+
+export enum UIMessageType {
+  def = 'default',
+  scs = 'success',
+  err = 'error',
+}
+
+export interface UIMessage {
+  message: string;
+  type: UIMessageType;
+}
+
 export interface AppStore {
-  customItems: CustomItem[];
-  apiItems: ApiItems;
+  [AppStoreKey.customItems]: CustomItem[];
+  [AppStoreKey.apiItems]: ApiItems;
+  [AppStoreKey.uiMessage]: UIMessage;
 }
 
 export const initialState: AppStore = {
-  customItems: [],
-  apiItems: {
+  [AppStoreKey.customItems]: [],
+  [AppStoreKey.apiItems]: {
     raw: [],
     current: [],
+  },
+  [AppStoreKey.uiMessage]: {
+    message: '',
+    type: UIMessageType.def,
   },
 };

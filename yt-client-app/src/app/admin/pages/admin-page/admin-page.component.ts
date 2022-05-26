@@ -1,20 +1,21 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { Path } from 'src/app/shared/constants/shared-constants';
-import { addCustomItem } from 'src/app/store/actions/custom-item.action';
+import { UINotifierService } from 'src/app/shared/services/notifier.service';
+import { setUIMessage, addCustomItem } from 'src/app/store';
 import { CustomItem } from 'src/app/youtube/models/custom-item.model';
+import { SUCCESS_UI_MESSAGE } from '../../constants/ui-message.constant';
 
 @Component({
   selector: 'yt-admin-page',
   templateUrl: './admin-page.component.html',
 })
 export class AdminPageComponent {
-  constructor(private store: Store, private router: Router) {}
+  constructor(private store: Store, private msb: UINotifierService) {}
 
   onNewItemFormSubmitAction(customCard: CustomItem): void {
     if (!customCard) return;
+
     this.store.dispatch(addCustomItem({ customItem: customCard }));
-    this.router.navigate([Path.main]);
+    this.store.dispatch(setUIMessage({ uiMessage: SUCCESS_UI_MESSAGE }));
   }
 }

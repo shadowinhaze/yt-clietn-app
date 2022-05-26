@@ -10,6 +10,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 // ================
 
 import { NgModule } from '@angular/core';
@@ -35,6 +36,7 @@ import { CardBorderColorDirective } from './directives/border-color.directive';
     MatTooltipModule,
     MatGridListModule,
     ReactiveFormsModule,
+    MatSnackBarModule,
   ],
   exports: [
     ReduceNumberPipe,
@@ -51,6 +53,7 @@ import { CardBorderColorDirective } from './directives/border-color.directive';
     MatTooltipModule,
     MatGridListModule,
     ReactiveFormsModule,
+    MatSnackBarModule,
   ],
 })
 export class SharedModule {}
