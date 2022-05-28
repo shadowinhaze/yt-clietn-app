@@ -14,9 +14,10 @@ import { AppComponent } from './app.component';
 import { interceptorProviders } from './core/interceptors/interceptors';
 import { effects, metaReducers, reducers } from './store';
 import { environment } from '../environments/environment';
+import { UiNotifierComponent } from './shared/components/ui-notifier/ui-notifier.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, UiNotifierComponent],
   imports: [
     BrowserModule,
     HttpClientModule,

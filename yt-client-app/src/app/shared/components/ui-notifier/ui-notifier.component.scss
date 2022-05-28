@@ -1,6 +1,6 @@
-@use '../styles/shared-styles' as shared;
+@use '../../styles/shared-styles' as shared;
 
-.mat-snack-bar {
+::ng-deep .mat-snack-bar {
   &_type {
     &_success {
       color: shared.$light;
@@ -9,6 +9,6 @@
   }
 }
 
-.mat-simple-snackbar-action  {
+::ng-deep .mat-simple-snackbar-action {
   color: shared.$light;
 }

@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { UINotifierService } from 'src/app/shared/services/notifier.service';
 import { setUIMessage, addCustomItem } from 'src/app/store';
 import { CustomItem } from 'src/app/youtube/models/custom-item.model';
 import { SUCCESS_UI_MESSAGE } from '../../constants/ui-message.constant';
@@ -10,7 +9,7 @@ import { SUCCESS_UI_MESSAGE } from '../../constants/ui-message.constant';
   templateUrl: './admin-page.component.html',
 })
 export class AdminPageComponent {
-  constructor(private store: Store, private msb: UINotifierService) {}
+  constructor(private store: Store) {}
 
   onNewItemFormSubmitAction(customCard: CustomItem): void {
     if (!customCard) return;

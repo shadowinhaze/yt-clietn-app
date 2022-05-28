@@ -1,19 +1,20 @@
-import { Injectable, OnDestroy } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import {
-  MatSnackBar,
   MatSnackBarRef,
   TextOnlySnackBar,
+  MatSnackBar,
 } from '@angular/material/snack-bar';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
-import { clearUIMessage, selectUIMessageFull } from 'src/app/store';
-import { DefaultUINotifierProperty } from '../constants/shared-ui-notifier.constants';
-import './notifier.styles.scss';
+import { selectUIMessageFull, clearUIMessage } from 'src/app/store';
+import { DefaultUINotifierProperty } from '../../constants/shared-ui-notifier.constants';
 
-@Injectable({
-  providedIn: 'root',
+@Component({
+  selector: 'yt-ui-notifier',
+  template: '',
+  styleUrls: ['./ui-notifier.component.scss'],
 })
-export class UINotifierService implements OnDestroy {
+export class UiNotifierComponent implements OnDestroy {
   private uiMessage$ = this.store.select(selectUIMessageFull);
 
   private subscription = new Subscription();
@@ -30,7 +31,7 @@ export class UINotifierService implements OnDestroy {
             message,
             DefaultUINotifierProperty.defaultButtonText,
             {
-              duration: 5000,
+              duration: 100000,
               panelClass: [
                 `${DefaultUINotifierProperty.defaultPanelClass}_type_${type}`,
               ],
