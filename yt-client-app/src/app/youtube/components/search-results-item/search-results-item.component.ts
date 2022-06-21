@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { SearchItem } from 'src/app/youtube/models/search-item.model';
+import { Paths } from 'src/app/shared/constants/shared-constants';
+import { SearchItemShort } from 'src/app/youtube/models/search-item.model';
 
 @Component({
   selector: 'yt-search-results-item',
@@ -7,5 +8,9 @@ import { SearchItem } from 'src/app/youtube/models/search-item.model';
   styleUrls: ['./search-results-item.component.scss'],
 })
 export class SearchResultsItemComponent {
-  @Input() card: SearchItem | null = null;
+  @Input() card!: SearchItemShort;
+
+  get id() {
+    return `${Paths.vid}/${this.card.id}`;
+  }
 }

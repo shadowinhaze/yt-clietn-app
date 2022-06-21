@@ -15,7 +15,7 @@ $footer-area: footer;
   '#{$thumbnail-area} #{$title-area} #{$date-area}'
   '#{$thumbnail-area} #{$content-area} #{$content-area}'
   '#{$thumbnail-area} #{$footer-area} #{$footer-area}';
-  grid-template-columns: 60% auto auto;
+  grid-template-columns: 50% auto auto;
   column-gap: 2em;
   align-items: center;
 
@@ -50,6 +50,7 @@ $footer-area: footer;
     font-weight: 400;
     font-size: 16px;
     color: $d-gray;
+    word-wrap: anywhere;
 
     h3 {
       text-transform: uppercase;
@@ -78,6 +79,7 @@ $footer-area: footer;
     top: 0;
     left: 0;
     border-radius: 4px;
+    z-index: -1;
 
     @mixin boxShadow($color) {
       box-shadow: 0.5em 0.5em 1em $color;
@@ -98,5 +100,15 @@ $footer-area: footer;
     &_color_transparent {
       @include boxShadow($grey);
     }
+  }
+
+  @media screen and (max-width: 660px) {
+    max-width: 90%;
+    grid-template-areas:
+    '#{$thumbnail-area} #{$thumbnail-area}'
+    '#{$title-area} #{$date-area}'
+    '#{$content-area} #{$content-area}'
+    '#{$footer-area} #{$footer-area}';
+    row-gap: 1em;
   }
 }

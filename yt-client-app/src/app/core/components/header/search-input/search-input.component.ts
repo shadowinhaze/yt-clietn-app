@@ -10,12 +10,7 @@ export class SearchInputComponent {
 
   @Output() readonly searchValueSubmit = new EventEmitter<string>();
 
-  onSearchValueChange(e: Event) {
-    const target = e.target as HTMLInputElement;
-    this.searchValue = target.value;
-  }
-
-  onSearchValueSubmit() {
-    this.searchValueSubmit.emit(this.searchValue);
+  changeSearchValue(value: string) {
+    this.searchValueSubmit.emit(value);
   }
 }

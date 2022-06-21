@@ -1,0 +1,20 @@
+.new-item-form {
+  display: flex;
+  flex-direction: column;
+  max-width: 350px;
+  margin: 2em auto;
+  padding: 2em;
+
+  &__inputs {
+    display: flex;
+    flex-direction: column;
+    row-gap: 1em;
+  }
+}
+
+.input {
+
+  &__label {
+    text-transform: capitalize;
+  }
+}

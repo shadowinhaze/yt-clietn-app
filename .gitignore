@@ -102,3 +102,6 @@ dist
 
 # TernJS port file
 .tern-port
+yt-client-app/src/app/shared/constants/api-key.ts
+.gitsecret/keys/random_seed
+!*.secret

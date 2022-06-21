@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { SettingsService } from 'src/app/core/services/settings.service';
 import { SortTypeItems } from 'src/app/shared/constants/shared-constants';
-import { DataService } from 'src/app/youtube/services/data.service';
 
 @Component({
   selector: 'yt-filter-sort',
@@ -9,30 +8,28 @@ import { DataService } from 'src/app/youtube/services/data.service';
   styleUrls: ['./filter-sort.component.scss'],
 })
 export class FilterSortComponent {
-  readonly sortTypes = {
-    date: SortTypeItems.date,
-    views: SortTypeItems.views,
-  };
+  readonly SortActions = [
+    {
+      name: 'date',
+      status: () => this.getIconCondition(SortTypeItems.date),
+      action: () => this.setSortType(SortTypeItems.date),
+    },
+    {
+      name: 'count of views',
+      status: () => this.getIconCondition(SortTypeItems.views),
+      action: () => this.setSortType(SortTypeItems.views),
+    },
+  ];
 
-  constructor(
-    public settingsService: SettingsService,
-    private dataService: DataService
-  ) {}
+  constructor(public settingsService: SettingsService) {}
 
   setSortType(type: SortType) {
     this.settingsService.sortType = type;
-    this.dataService.sortData(
-      this.settingsService.sortType,
-      this.settingsService.sortDirection
-    );
-    this.settingsService.update();
   }
 
   setFilter(value: string) {
     this.settingsService.sortType = '';
     this.settingsService.filterValue = value;
-    this.dataService.filterData(this.settingsService.filterValue);
-    this.settingsService.update();
   }
 
   getIconCondition(type: SortType) {
