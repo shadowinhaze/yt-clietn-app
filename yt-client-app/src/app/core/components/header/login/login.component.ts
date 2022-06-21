@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Router } from '@angular/router';
-import { Paths } from 'src/app/shared/constants/shared-constants';
+import { Path } from 'src/app/shared/constants/shared-constants';
 
 @Component({
   selector: 'yt-login',
@@ -16,6 +16,8 @@ export class LoginComponent {
 
   @Output() readonly logOut = new EventEmitter();
 
+  pathToAdmin = `/${Path.admin}`;
+
   onLogOut() {
     this.logOut.emit();
   }
@@ -26,6 +28,6 @@ export class LoginComponent {
   }
 
   goToSignIn() {
-    this.router.navigate([Paths.home, Paths.auth, Paths.signIn]);
+    this.router.navigate([Path.home, Path.auth, Path.signIn]);
   }
 }

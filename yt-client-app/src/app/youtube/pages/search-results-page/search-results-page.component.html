@@ -1,1 +1,4 @@
-<yt-search-results-list [data]="data"></yt-search-results-list>
+<yt-search-results-list
+  [apiData]="apiData$ | async"
+  [customData]="customData$ | async"
+></yt-search-results-list>

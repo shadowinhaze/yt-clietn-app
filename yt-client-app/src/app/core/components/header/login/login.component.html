@@ -10,16 +10,25 @@
     Sing in
   </button>
   <ng-template #authorizedChip>
-    <mat-chip
-      class="header-login__chip"
-      *ngIf="isAuthorized"
-      (click)="onLogOut()"
-      #tooltip="matTooltip"
-      matTooltip="Click to log out"
-      [matTooltipPosition]="'below'"
-      matTooltipHideDelay="200"
-      ><span>{{ loginFirstLetter }}</span
-      >{{ userLogin }}</mat-chip
-    >
+    <div class="header-login__actions">
+      <mat-chip
+        class="header-login__chip"
+        *ngIf="isAuthorized"
+        (click)="onLogOut()"
+        #tooltip="matTooltip"
+        matTooltip="Click to log out"
+        [matTooltipPosition]="'below'"
+        matTooltipHideDelay="200"
+        ><span>{{ loginFirstLetter }}</span
+        >{{ userLogin }}</mat-chip
+      >
+      <button
+        mat-icon-button
+        aria-label="Go to Admin - Creation Laboratory"
+        [routerLink]="pathToAdmin"
+      >
+        <mat-icon>admin_panel_settings</mat-icon>
+      </button>
+    </div>
   </ng-template>
 </div>

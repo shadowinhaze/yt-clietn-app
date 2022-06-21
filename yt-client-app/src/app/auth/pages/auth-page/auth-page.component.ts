@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { Paths } from 'src/app/shared/constants/shared-constants';
+import { Path } from 'src/app/shared/constants/shared-constants';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -15,7 +15,7 @@ export class AuthPageComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.subscription = this.auth.userChange.subscribe((status) => {
-      if (status) this.router.navigate([Paths.home, Paths.main]);
+      if (status) this.router.navigate([Path.home, Path.main]);
     });
   }
 

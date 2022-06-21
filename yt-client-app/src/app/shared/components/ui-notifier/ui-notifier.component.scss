@@ -1,0 +1,14 @@
+@use '../../styles/shared-styles' as shared;
+
+::ng-deep .mat-snack-bar {
+  &_type {
+    &_success {
+      color: shared.$light;
+      background-color: shared.$green;
+    }
+  }
+}
+
+::ng-deep .mat-simple-snackbar-action {
+  color: shared.$light;
+}

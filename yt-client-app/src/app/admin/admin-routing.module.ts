@@ -1,15 +1,15 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { Paths } from '../shared/constants/shared-constants';
+import { Path } from '../shared/constants/shared-constants';
 import { AdminPageComponent } from './pages/admin-page/admin-page.component';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: Paths.newItem,
+    redirectTo: Path.newItem,
   },
   {
-    path: Paths.newItem,
+    path: Path.newItem,
     component: AdminPageComponent,
   },
 ];

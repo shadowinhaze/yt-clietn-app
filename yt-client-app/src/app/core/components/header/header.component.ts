@@ -6,7 +6,7 @@ import {
 } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/auth/services/auth.service';
-import { APP_TITLE, Paths } from 'src/app/shared/constants/shared-constants';
+import { APP_TITLE, Path } from 'src/app/shared/constants/shared-constants';
 import { SearchService } from '../../services/search.service';
 
 @Component({
@@ -35,7 +35,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
         if (event instanceof NavigationEnd) {
           const path = event.urlAfterRedirects;
           this.isOnSearchPage =
-            path.includes(Paths.main) && !path.includes(Paths.vid);
+            path.includes(Path.main) && !path.includes(Path.video);
         }
       })
     );
@@ -59,7 +59,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   navigateToMain(): void {
-    if (this.auth.isAuthorized) this.router.navigate([Paths.home]);
+    if (this.auth.isAuthorized) this.router.navigate([Path.home]);
   }
 
   onSearchValueSubmit(value: string) {

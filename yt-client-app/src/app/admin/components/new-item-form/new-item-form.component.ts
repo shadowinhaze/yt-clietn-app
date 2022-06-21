@@ -1,10 +1,5 @@
-import { Component } from '@angular/core';
-import {
-  AbstractControl,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { Component, EventEmitter, Output } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import {
   ERROR_MESSAGES,
   NewItemForm,
@@ -13,6 +8,12 @@ import {
   FormsErrorsKeys,
   NewItemFormLimits,
 } from 'src/app/shared/constants/shared-forms-constants';
+import {
+  NewItemFormCollection,
+  NewItemFormKeys,
+} from 'src/app/shared/types/shared';
+import { CustomItem } from 'src/app/youtube/models/custom-item.model';
+import { v4 } from 'uuid';
 
 @Component({
   selector: 'yt-new-item-form',
@@ -20,6 +21,8 @@ import {
   styleUrls: ['./new-item-form.component.scss'],
 })
 export class NewItemFormComponent {
+  @Output() formSubmit = new EventEmitter<CustomItem>();
+
   readonly Fields: NewItemFormCollection = NewItemFormFields;
 
   readonly minDate = new Date();
@@ -35,35 +38,50 @@ export class NewItemFormComponent {
     ]),
     [NewItemForm.img]: new FormControl('', [
       Validators.required,
-      Validators.pattern(FORMS_PATTERNS.url),
+      Validators.pattern(FORMS_PATTERNS.img),
     ]),
-    [NewItemForm.vid]: new FormControl('', [
+    [NewItemForm.video]: new FormControl('', [
       Validators.required,
-      Validators.pattern(FORMS_PATTERNS.url),
+      Validators.pattern(FORMS_PATTERNS.video),
     ]),
+    [NewItemForm.date]: new FormControl(new Date()),
   });
 
-  getFormPart(part: NewItemFormKeys): AbstractControl | null {
-    return this.newItemForm.get(part);
-  }
-
   getErrorMessageText(field: NewItemFormKeys) {
-    if (this.getFormPart(field)?.hasError(FormsErrorsKeys.req)) {
+    const hasError = (key: FormsErrorsKeys) =>
+      this.newItemForm.get(field)?.hasError(key);
+
+    if (hasError(FormsErrorsKeys.req)) {
       return ERROR_MESSAGES[field].req;
     }
 
-    if (this.getFormPart(field)?.hasError(FormsErrorsKeys.minLen)) {
+    if (hasError(FormsErrorsKeys.minLen)) {
       return ERROR_MESSAGES[field].minlength;
     }
 
-    if (this.getFormPart(field)?.hasError(FormsErrorsKeys.maxLen)) {
+    if (hasError(FormsErrorsKeys.maxLen)) {
       return ERROR_MESSAGES[field].maxlength;
     }
 
-    if (this.getFormPart(field)?.hasError(FormsErrorsKeys.pattern)) {
+    if (hasError(FormsErrorsKeys.pattern)) {
       return ERROR_MESSAGES[field].pattern;
     }
 
     return 'unknown error';
+  }
+
+  newItemFormSubmit() {
+    const newCard = {
+      id: v4(),
+      title: this.newItemForm.value[NewItemForm.title],
+      description: this.newItemForm.value[NewItemForm.descr],
+      imageLink: this.newItemForm.value[NewItemForm.img],
+      videoLink: this.newItemForm.value[NewItemForm.video],
+      creationDate: this.newItemForm.value[NewItemForm.date],
+    };
+
+    this.formSubmit.emit(newCard);
+
+    this.newItemForm.reset();
   }
 }

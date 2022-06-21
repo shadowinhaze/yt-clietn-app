@@ -2,10 +2,16 @@ type SortType = 'date' | 'views' | '';
 
 type SortDirection = 'asc' | 'desc' | '';
 
-interface Settings {
-  sortType: SortType;
-  sortDirection: SortDirection;
-  filterValue: string;
+const enum AppSettingsKey {
+  sortType = 'sortType',
+  sortDir = 'sortDirection',
+  filterVal = 'filterValue',
+}
+
+interface AppSettings {
+  [AppSettingsKey.sortType]: SortType;
+  [AppSettingsKey.sortDir]: SortDirection;
+  [AppSettingsKey.filterVal]: string;
 }
 
 interface AuthParams {
@@ -42,3 +48,17 @@ interface NewItemFormItem {
   placeholder: string;
   required: boolean;
 }
+
+export {
+  SortType,
+  SortDirection,
+  AppSettingsKey,
+  AppSettings,
+  AuthParams,
+  ErrorsBase,
+  RequestValue,
+  LoginFormKeys,
+  NewItemFormKeys,
+  NewItemFormCollection,
+  NewItemFormItem,
+};

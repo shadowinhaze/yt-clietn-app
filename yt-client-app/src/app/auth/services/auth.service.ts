@@ -1,11 +1,14 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { Subject, Subscription } from 'rxjs';
+import { LocalStorageService } from 'src/app/core/services/local-storage.service';
 import {
   FAKE_AUTH_TOKEN,
   LocalStorageKeys,
-  Paths,
+  Path,
 } from 'src/app/shared/constants/shared-constants';
+import { clearCustomItems } from 'src/app/store';
 
 @Injectable({
   providedIn: 'root',
@@ -17,7 +20,7 @@ export class AuthService implements OnDestroy {
 
   private subscription: Subscription = new Subscription();
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private store: Store) {
     this.init();
   }
 
@@ -30,8 +33,12 @@ export class AuthService implements OnDestroy {
   }
 
   init(): void {
-    if (localStorage[LocalStorageKeys.token]) {
-      const name = localStorage[LocalStorageKeys.name];
+    const storedToken = LocalStorageService.getStoreItem(
+      LocalStorageKeys.token
+    );
+
+    if (storedToken) {
+      const name = LocalStorageService.getStoreItem(LocalStorageKeys.name);
       this.user = name;
       this.userChange.next(name);
     }
@@ -39,21 +46,23 @@ export class AuthService implements OnDestroy {
     this.subscription.add(
       this.userChange.subscribe((name) => {
         this.user = name;
-        if (!name) this.router.navigate([Paths.home, Paths.auth]);
+        if (!name) this.router.navigate([Path.home, Path.auth]);
       })
     );
   }
 
   logIn(userName: string) {
     this.userChange.next(userName);
-    localStorage.setItem(LocalStorageKeys.token, FAKE_AUTH_TOKEN);
-    localStorage.setItem(LocalStorageKeys.name, userName);
+    LocalStorageService.setStoreItem(FAKE_AUTH_TOKEN, LocalStorageKeys.token);
+    LocalStorageService.setStoreItem(userName, LocalStorageKeys.name);
   }
 
   logOut() {
     this.userChange.next(null);
-    localStorage.removeItem(LocalStorageKeys.token);
-    localStorage.removeItem(LocalStorageKeys.name);
+    LocalStorageService.clearStoredItem(LocalStorageKeys.token);
+    LocalStorageService.clearStoredItem(LocalStorageKeys.name);
+    LocalStorageService.clearStoredItem(LocalStorageKeys.cards);
+    this.store.dispatch(clearCustomItems());
   }
 
   ngOnDestroy(): void {

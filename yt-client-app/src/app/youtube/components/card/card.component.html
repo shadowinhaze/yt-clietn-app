@@ -2,11 +2,11 @@
   <img
     mat-card-image
     class="results-card__thumbnail"
-    src="{{ card.thumbnails['medium'].url }}"
-    alt="{{ card.channelTitle }} | {{ card.title }}"
+    [src]="imageLink"
+    alt="{{ card.title }}"
   />
-  <mat-card-content class="results-card__content">
-    <yt-results-card-descriptor [card]="card"></yt-results-card-descriptor>
+  <mat-card-content class="results-card__content" *ngIf="card">
+    <yt-results-card-descriptor [card]="apiCard"></yt-results-card-descriptor>
   </mat-card-content>
   <mat-card-title class="results-card__title">{{ card.title }}</mat-card-title>
   <mat-card-actions class="results-card__actions">
@@ -23,7 +23,7 @@
     <div
       class="results-card__indicator"
       ytCardBorderColor
-      publishedDate="{{ card.publishedAt }}"
+      publishedDate="{{ cardDate }}"
     ></div>
   </mat-card-footer>
 </mat-card>

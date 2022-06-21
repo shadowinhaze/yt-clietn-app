@@ -1,28 +1,22 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { DataService } from 'src/app/core/services/data.service';
+import { Component } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { map, Observable } from 'rxjs';
+import { selectApiItems, selectCustomItems } from 'src/app/store';
+import { AppStore } from 'src/app/store/models/store.model';
+import { CustomItem } from '../../models/custom-item.model';
 import { SearchItemShort } from '../../models/search-item.model';
 
 @Component({
   selector: 'yt-search-results-page',
   templateUrl: './search-results-page.component.html',
 })
-export class SearchResultsPageComponent implements OnInit, OnDestroy {
-  public data: SearchItemShort[] = [];
+export class SearchResultsPageComponent {
+  public customData$: Observable<CustomItem[]> =
+    this.store.select(selectCustomItems);
 
-  private subscription: Subscription = new Subscription();
+  public apiData$: Observable<SearchItemShort[]> = this.store
+    .select(selectApiItems)
+    .pipe(map((data) => data.current));
 
-  constructor(private dataService: DataService) {}
-
-  ngOnInit(): void {
-    this.subscription.add(
-      this.dataService.data$.subscribe((data) => {
-        this.data = [...data];
-      })
-    );
-  }
-
-  ngOnDestroy(): void {
-    this.subscription?.unsubscribe();
-  }
+  constructor(private store: Store<AppStore>) {}
 }

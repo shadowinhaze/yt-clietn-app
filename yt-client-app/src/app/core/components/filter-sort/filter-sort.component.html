@@ -4,14 +4,9 @@
     <ng-container *ngFor="let sortAction of SortActions">
       <button mat-stroked-button (click)="sortAction.action()">
         {{ sortAction.name }}
-        <ng-template
-          ytDirectionIcon
-          [isDirShown]="sortAction.status()"
-          [isDirAsc]="settingsService.isAscending"
-          [thumbDown]="thumbDown"
-        >
-          <mat-icon>trending_up</mat-icon>
-        </ng-template>
+        <mat-icon *ngIf="sortAction.status()">{{
+          isAscending ? 'trending_up' : 'trending_down'
+        }}</mat-icon>
       </button>
     </ng-container>
   </div>
@@ -19,12 +14,8 @@
     <h3 class="header-filter__label">By word or sentence:</h3>
     <input
       type="text"
-      [(ngModel)]="settingsService.filterValue"
+      [ngModel]="filterValue"
       (ngModelChange)="setFilter($event)"
     />
   </div>
 </div>
-
-<ng-template #thumbDown>
-  <mat-icon>trending_down</mat-icon>
-</ng-template>
