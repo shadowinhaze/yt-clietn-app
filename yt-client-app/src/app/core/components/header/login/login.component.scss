@@ -1,0 +1,35 @@
+@import '../../../../shared/styles/shared-styles.scss';
+
+.header-login {
+  &__button {
+    display: flex;
+    align-items: center;
+  }
+
+  &__chip {
+    display: flex;
+    justify-content: flex-start;
+    padding: 0.5em 1em 0.5em 0.5em;
+    align-items: center;
+    column-gap: 0.5em;
+    border-radius: 4px;
+    user-select: none;
+
+    span {
+      display: flex;
+      height: 2em;
+      width: 2em;
+      background-color: $d-gray;
+      border-radius: 50%;
+      justify-content: center;
+      align-items: center;
+      color: $light;
+      font-weight: 700;
+      font-size: 15px;
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}

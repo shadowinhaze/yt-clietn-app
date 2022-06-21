@@ -1,9 +1,2 @@
-<yt-header
-  (filterValueChange)="filterValueChange()"
-  (searchValueChange)="searchValueChange()"
-  (setSortType)="setSortType()"
-></yt-header>
-<yt-search-results-list
-  *ngIf="isActiveResultsList"
-  [data]="resultsList()"
-></yt-search-results-list>
+<yt-header></yt-header>
+<router-outlet></router-outlet>

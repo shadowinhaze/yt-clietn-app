@@ -1,0 +1,42 @@
+<header>
+  <mat-toolbar class="header__toolbar">
+    <mat-toolbar-row class="header__container">
+      <div class="header__subcontainer">
+        <div class="header__logo" (click)="navigateToMain()">
+          <h1 class="header__logo__title header__logo__title_hidden">
+            {{ mainTitle }}
+          </h1>
+          <img
+            src="assets/yt-logo.svg"
+            alt="{{ mainTitle }} Logotype"
+            class="header__logo__image"
+          />
+        </div>
+        <yt-search-input
+          *ngIf="this.auth.isAuthorized"
+          style="flex-grow: 2"
+          [searchValue]="searchValue"
+          (searchValueSubmit)="onSearchValueSubmit($event)"
+        ></yt-search-input>
+        <button
+          mat-mini-fab
+          color="primary"
+          aria-label="Application sorting and filtering parametres"
+          (click)="toggleSettings()"
+          *ngIf="this.auth.isAuthorized"
+          [disabled]="!settingsService.isSearchListShown"
+        >
+          <mat-icon>sort</mat-icon>
+        </button>
+      </div>
+      <yt-login
+        [isAuthorized]="this.auth.isAuthorized"
+        [userLogin]="this.auth.userLogin"
+        (logOut)="logOut()"
+      ></yt-login>
+    </mat-toolbar-row>
+    <mat-toolbar-row *ngIf="isSettingsPanelShown" class="header__container">
+      <yt-filter-sort style="width: 100%"></yt-filter-sort>
+    </mat-toolbar-row>
+  </mat-toolbar>
+</header>
