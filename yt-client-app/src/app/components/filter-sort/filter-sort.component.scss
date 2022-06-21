@@ -1,0 +1,29 @@
+@import '../../shared/global-styles.scss';
+
+.header-filter {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 580px;
+  margin: 0 auto;
+  justify-content: space-between;
+  &__block {
+    display: flex;
+    align-items: center;
+    column-gap: 0.5em;
+  }
+  &__label {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 14px;
+    color: $grey;
+  }
+  @media screen and (max-width: 630px) {
+    flex-wrap: wrap;
+    row-gap: 0.5em;
+    &__block {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+}

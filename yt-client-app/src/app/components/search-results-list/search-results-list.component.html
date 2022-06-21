@@ -1,1 +1,11 @@
-<p>search-results-list works!</p>
+<mat-grid-list
+  class="search-results-list"
+  [cols]="colsAmount"
+  gutterSize="1em"
+  rowHeight="450px"
+  (window:resize)="handleColumns($event)"
+>
+  <mat-grid-tile *ngFor="let ytResponseCard of data">
+    <yt-search-results-item [card]="ytResponseCard"></yt-search-results-item>
+  </mat-grid-tile>
+</mat-grid-list>

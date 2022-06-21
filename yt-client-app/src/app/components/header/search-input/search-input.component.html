@@ -1,1 +1,21 @@
-<p>search-input works!</p>
+<form class="search-form">
+  <mat-form-field class="search-form__input-wrapper" appearance="fill">
+    <mat-label>App Search</mat-label>
+    <input
+      matInput
+      class="search-form__input"
+      type="search"
+      placeholder="What are you want to find out?"
+      [value]="settingsService.searchValue"
+      autocomplete="off"
+    />
+  </mat-form-field>
+  <button
+    mat-raised-button
+    class="search-form__submit"
+    color="primary"
+    (click)="action()"
+  >
+    Search
+  </button>
+</form>
